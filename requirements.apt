@@ -1,0 +1,71 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 LucidaGrande;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww15320\viewh9600\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 #*******************************************************************************\
+#requirements.apt\
+#*******************************************************************************\
+\
+#Purpose:\
+#This file lists all the packages from the Advanced Packaging Tool that are \
+#required by SWOT-river-volume, and is used by the "apt-get" software.\
+#Author:\
+#Jeffrey Wade, 2025\
+\
+#*******************************************************************************\
+#Usage\
+#*******************************************************************************\
+#sudo apt-get install -y $(grep -v -E '(^#|^$)' requirements.apt)\
+\
+\
+#*******************************************************************************\
+#Requirements for apt-get\
+#*******************************************************************************\
+\
+#-------------------------------------------------------------------------------\
+#Code management\
+#-------------------------------------------------------------------------------\
+git\
+#version control system\
+vim\
+#text editor\
+zip\
+#file compression\
+\
+#-------------------------------------------------------------------------------\
+#Code building\
+#-------------------------------------------------------------------------------\
+python3.11-dev\
+#Includes binary libraries (python3.11) and header files (python3.11-dev)\
+python3-distutils\
+#python3 support for building and installing additional modules\
+g++\
+#includes C (gcc) and C++ (g++) compilers\
+libgdal-dev\
+#files needed to develop a software that use GDAL/OGR\
+libspatialindex-dev\
+#spatial indexing methods, needed for rtree\
+ffmpeg\
+#multimedia file transcoding\
+nco\
+#netCDF operators\
+\
+#-------------------------------------------------------------------------------\
+#Code testing\
+#-------------------------------------------------------------------------------\
+wget\
+#download utility\
+ca-certificates\
+#certificate authority\
+unzip\
+#file extraction\
+netcdf-bin\
+#netCDF binaries\
+\
+\
+#*******************************************************************************\
+#End\
+#*******************************************************************************}
