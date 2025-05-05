@@ -290,11 +290,11 @@ plt.fill_between(comp_df.index,
                  comp_df.mV_low_anom_mean - comp_df.mV_low_anom_std,
                  comp_df.mV_low_anom_mean + comp_df.mV_low_anom_std,
                  color='#e8f3cb', alpha=.7, label='Low Std', zorder=5)
-plt.plot(comp_df.mV_nrm_anom_mean, label='Nrm', color='#2f6867', zorder=4)
+plt.plot(comp_df.mV_nrm_anom_mean, label='Med', color='#2f6867', zorder=4)
 plt.fill_between(comp_df.index,
                  comp_df.mV_nrm_anom_mean - comp_df.mV_nrm_anom_std,
                  comp_df.mV_nrm_anom_mean + comp_df.mV_nrm_anom_std,
-                 color='#e2f2f2', alpha=.7, label='Nrm Std', zorder=3)
+                 color='#e2f2f2', alpha=.7, label='Med Std', zorder=3)
 plt.plot(comp_df.mV_hig_anom_mean, label='Hig', color='#7549b3', zorder=2)
 plt.fill_between(comp_df.index,
                  comp_df.mV_hig_anom_mean - comp_df.mV_hig_anom_std,
@@ -340,14 +340,14 @@ for i in range(len(comp_reg_all)):
                      comp_reg_all[i].mV_low_anom_mean +
                      comp_reg_all[i].mV_low_anom_std,
                      color='#e8f3cb', alpha=.7, label='Low Std', zorder=5)
-    plt.plot(comp_reg_all[i].mV_nrm_anom_mean, label='Nrm',
+    plt.plot(comp_reg_all[i].mV_nrm_anom_mean, label='Med',
              color='#2f6867', zorder=4)
     plt.fill_between(comp_reg_all[i].index,
                      comp_reg_all[i].mV_nrm_anom_mean -
                      comp_reg_all[i].mV_nrm_anom_std,
                      comp_reg_all[i].mV_nrm_anom_mean +
                      comp_reg_all[i].mV_nrm_anom_std,
-                     color='#e2f2f2', alpha=.7, label='Nrm Std', zorder=3)
+                     color='#e2f2f2', alpha=.7, label='Med Std', zorder=3)
     plt.plot(comp_reg_all[i].mV_hig_anom_mean, label='Hig',
              color='#7549b3', zorder=2)
     plt.fill_between(comp_reg_all[i].index,
@@ -465,7 +465,7 @@ plt.figure()
 for j in range(31, 60):
     if j == 31:
         plt.plot(slice_df.index, slice_df.iloc[:, j],
-                 color='#2f6867', alpha=0.2, label='MeanDRS Annual Slice (Nrm)')
+                 color='#2f6867', alpha=0.2, label='MeanDRS Annual Slice (Med)')
     else:
         plt.plot(slice_df.index, slice_df.iloc[:, j],
                  color='#2f6867', alpha=0.2)
@@ -533,7 +533,7 @@ for i in range(len(slice_reg_all)):
                  color='red', alpha=0.2)
     plt.plot(slice_reg_all[i].V_SWOT, label='SWOT', color='black', linewidth=2)
     plt.ylabel('Volume Anomaly, km³', fontsize=13)
-    plt.title('SWOT Vol vs Annual Slices of Nrm MeanDRS Pfaf ' + pfaf_list[i])
+    plt.title('SWOT Vol vs Annual Slices of Med MeanDRS Pfaf ' + pfaf_list[i])
     plt.legend()
     plt.axhline(0, color='gray', linestyle='--', alpha=0.3)
     plt.xticks(ticks=range(0, len(slice_reg_all[i].mon)),
