@@ -49,12 +49,14 @@ from scipy.signal import correlate
 # Get command line arguments
 # ******************************************************************************
 IS_arg = len(sys.argv)
-if IS_arg != 3:
-    print('ERROR - 2 arguments must be used')
+if IS_arg != 5:
+    print('ERROR - 4 arguments must be used')
     raise SystemExit(22)
 
 comp_reg_in = sys.argv[1]
 comp_global_in = sys.argv[2]
+mag_out = sys.argv[3]
+corr_out = sys.argv[4]
 
 
 # ******************************************************************************
