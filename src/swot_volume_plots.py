@@ -27,46 +27,45 @@ import cartopy
 import cartopy.feature as cfeature
 
 
-# ******************************************************************************
-# Set input file paths
-# ******************************************************************************
-# Set input file path for volume anomalies
-comp_reg_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-    'global_summary/MeanDRS_comp/regional/'
+# # ******************************************************************************
+# # Set input file paths
+# # ******************************************************************************
+# # Set input file path for volume anomalies
+# comp_reg_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
+#     'global_summary/MeanDRS_comp/regional/'
 
-comp_global_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-    'global_summary/MeanDRS_comp/global/MeanDRS_comp_global_summary.csv'
+# comp_global_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
+#     'global_summary/MeanDRS_comp/global/MeanDRS_comp_global_summary.csv'
 
-scale_reg_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-    'global_summary/MeanDRS_scale/regional/'
+# scale_reg_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
+#     'global_summary/MeanDRS_scale/regional/'
 
-scale_global_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-    'global_summary/MeanDRS_scale/global/MeanDRS_scale_global_summary.csv'
+# scale_global_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
+#     'global_summary/MeanDRS_scale/global/MeanDRS_scale_global_summary.csv'
 
-slice_reg_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-    'MeanDRS_slice/'
+# slice_reg_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
+#     'MeanDRS_slice/'
 
-slice_global_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-    'global_summary/MeanDRS_slice/MeanDRS_slice_global_summary.csv'
+# slice_global_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
+#     'global_summary/MeanDRS_slice/MeanDRS_slice_global_summary.csv'
 
-mag_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/global_summary/'\
-    'MeanDRS_agree/MeanDRS_agree_global_mag_ratio.csv'
+# mag_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/global_summary/'\
+#     'MeanDRS_agree/MeanDRS_agree_global_mag_ratio.csv'
 
-corr_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/global_summary/'\
-    'MeanDRS_agree/MeanDRS_agree_global_corr.csv'
+# corr_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/global_summary/'\
+#     'MeanDRS_agree/MeanDRS_agree_global_corr.csv'
 
-world_in = '/Users/jwade/jpl/computing/swot_volume/figures/'\
-    'global_variability_maps/shp/ne_110m_land/ne_110m_land_antarctica.shp'
+# world_in = '/Users/jwade/jpl/computing/swot_volume/figures/'\
+#     'global_variability_maps/shp/ne_110m_land/ne_110m_land_antarctica.shp'
 
-grat_in = '/Users/jwade/jpl/computing/swot_volume/figures/'\
-    'global_variability_maps/shp/ne_50m_graticules_30/ne_50m_graticules_30.shp'
+# grat_in = '/Users/jwade/jpl/computing/swot_volume/figures/'\
+#     'global_variability_maps/shp/ne_50m_graticules_30/ne_50m_graticules_30.shp'
 
-pfaf_in = '/Users/jwade/jpl/computing/swot_volume/figures/'\
-    'global_variability_maps/shp/pfaf_region/hybas_global_lev02_v1c.shp'
+# pfaf_in = '/Users/jwade/jpl/computing/swot_volume/figures/'\
+#     'global_variability_maps/shp/pfaf_region/hybas_global_lev02_v1c.shp'
     
-sword_anom_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-    'SWORD_reach_anom/'
-
+# sword_anom_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
+#     'SWORD_reach_anom/'
 
 
 # ******************************************************************************
@@ -186,14 +185,13 @@ try:
 except IOError:
     print('ERROR - Unable to open ' + pfaf_in)
     raise SystemExit(22)
-    
+
 try:
     if os.path.isdir(sword_anom_in):
         pass
 except IOError:
     print('ERROR - '+sword_anom_in+' invalid folder path')
     raise SystemExit(22)
-
 
 
 # ******************************************************************************
@@ -387,7 +385,7 @@ plt.rcParams['font.size'] = 12
 plt.figure()
 plt.plot(scale_df.V_SWOT, label='SWOT (Observed)', color='black', linewidth=3,
          zorder=3)
-plt.plot(scale_df.V_SWOT_ms, label='SWOT (Scaled All Reaches)',
+plt.plot(scale_df.V_SWOT_ms, label='SWOT (Scaled)',
          color='#c63741',
          linewidth=2,
          zorder=2)
@@ -655,7 +653,7 @@ plt.rcParams["svg.fonttype"] = "none"
 plt.rcParams['font.size'] = 12
 plt.figure(figsize=(12, 6))
 plt.bar(np.arange(len(vol_df)), vol_df.V_ms, width=0.6, color='#FF463B',
-        edgecolor='black', label="SWOT (Scaled All Reaches)", zorder=2)
+        edgecolor='black', label="SWOT (Scaled)", zorder=2)
 plt.bar(np.arange(len(vol_df)), vol_df.V, width=0.6, color='#3FB9DE',
         edgecolor='black', label="SWOT (Observed)", zorder=3)
 plt.xlim([-.5, 60.5])
@@ -663,6 +661,7 @@ plt.ylim([0, 300])
 plt.ylabel("SWOT Volume Variability, km³", fontsize=13)
 plt.xlabel('Pfaf Region', fontsize=13)
 plt.xticks(ticks=np.arange(len(vol_df)), labels=vol_df.pfaf_name, rotation=90)
+plt.grid(axis='y', linestyle='--', linewidth=0.5, zorder=1)
 plt.legend()
 plt.show()
 
@@ -835,90 +834,3 @@ cbar.set_label('Optimal Absolute Lag, Months \nSWOT vs MeanDRS',)
 cbar.set_ticks(bins)
 cbar.set_ticklabels([f'{tick:.2f}' for tick in bins])
 plt.show()
-
-# # ------------------------------------------------------------------------------
-# # Reach Specific Volume Anomalies
-# # ------------------------------------------------------------------------------
-# plt.rcParams["font.family"] = "Arial"
-# plt.rcParams["svg.fonttype"] = "none"
-# plt.rcParams['font.size'] = 12
-# fig = plt.figure(figsize=(12, 6))
-# ax = plt.axes(projection=ccrs.Robinson())
-# ax.set_global()
-# grat.plot(ax=ax, transform=ccrs.PlateCarree(), linewidth=0.2, color='gray',
-#           zorder=1)
-# world.plot(ax=ax, transform=ccrs.PlateCarree(), facecolor="none",
-#            edgecolor="gray", linewidth=0.4, zorder=2, hatch=".")
-# world.plot(ax=ax, transform=ccrs.PlateCarree(), facecolor='none',
-#            edgecolor="black", linewidth=0.4, zorder=3)
-# pfaf.plot(ax=ax, transform=ccrs.PlateCarree(),
-#           facecolor="none",
-#           zorder=3, edgecolor='black',
-#           linewidth=0.4)
-# sword_anom_all[0].plot(column='vol_time', cmap='viridis',
-#                        ax=ax, transform=ccrs.PlateCarree(), zorder=1)
-# plt.show()
-
-# # for i in range(len(sword_anom_all)):
-#     # sword_anom_all[i].plot(column='vol_time', cmap='viridis',
-#     #                        legend=(i == 0), ax=ax, zorder=1,
-#     #                        transform=ccrs.PlateCarree())
-
-# # ------------------------------------------------------------------------------
-# # ReachVolume Anomaly Max Timing
-# # ------------------------------------------------------------------------------
-# plt.rcParams["font.family"] = "Arial"
-# plt.rcParams["svg.fonttype"] = "none"
-# plt.rcParams['font.size'] = 12
-
-# fig = plt.figure(figsize=(24, 12))
-# ax = plt.axes(projection=ccrs.Robinson())
-# ax.set_global()
-
-# grat.plot(ax=ax, transform=ccrs.PlateCarree(), linewidth=0.2, color='gray',
-#           zorder=1)
-# world.plot(ax=ax, transform=ccrs.PlateCarree(), facecolor="none",
-#            edgecolor="gray", linewidth=0.4, zorder=2, hatch=".")
-# world.plot(ax=ax, transform=ccrs.PlateCarree(), facecolor='none',
-#            edgecolor="black", linewidth=0.4, zorder=3)
-# pfaf.plot(ax=ax, transform=ccrs.PlateCarree(),
-#           facecolor="none", edgecolor='black', linewidth=0.4, zorder=3)
-
-# ax.set_extent([-180, 180, -90, 90], crs=ccrs.PlateCarree())
-# ax.set_autoscale_on(False)
-
-# month_colors = plt.cm.twilight(np.linspace(0, 1, 12))
-# timing_cmap = ListedColormap(month_colors)
-# timing_bound = np.arange(0.5, 13.5, 1)
-# timing_norm = BoundaryNorm(timing_bound, timing_cmap.N)
-
-# timing_i = []
-# for i in range(len(sword_anom_all)):
-#     print(i)
-#     sword_anom_sort = sword_anom_all[i].sort_values(by='facc', ascending=False)
-#     timing_i.append(sword_anom_sort)
-# timing_gdf = gpd.GeoDataFrame(pd.concat(timing_i, ignore_index=True))
-
-# facc_min = timing_gdf['facc'].min()
-# facc_max = timing_gdf['facc'].max()
-
-# timing_gdf['linewidth'] = 0.1 + 2.9 * (np.log1p(timing_gdf['facc']) - np.log1p(facc_min)) / (np.log1p(facc_max) - np.log1p(facc_min))
-
-# timing_gdf['linewidth_bin'] = (timing_gdf['linewidth'] * 10).round() / 10
-
-# # For each unique linewidth bin, plot all features together
-# for lw in sorted(timing_gdf['linewidth_bin'].unique(), reverse=True):
-#     subset = timing_gdf[timing_gdf['linewidth_bin'] == lw]
-#     subset.plot(column='vol_time', cmap=timing_cmap, legend=False,
-#                 ax=ax, zorder=4, transform=ccrs.PlateCarree(),
-#                 norm=timing_norm, linewidth=lw)
-
-# sm = plt.cm.ScalarMappable(cmap=timing_cmap, norm=timing_norm)
-# sm.set_array([])
-# cbar = plt.colorbar(sm, ax=ax, orientation='vertical', shrink=0.85)
-# cbar.set_ticks(np.arange(1, 13))
-# cbar.set_ticklabels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-#                      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
-# cbar.set_label('Month of Maximum Volume Anomaly')
-
-# plt.show()
