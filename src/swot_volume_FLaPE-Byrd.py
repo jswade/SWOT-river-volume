@@ -1,33 +1,21 @@
 #!/usr/bin/env python3
 # ******************************************************************************
-# swot_volume_FLaPE-Byrd_global.py
+# swot_volume_FLaPE-Byrd.py
 # ******************************************************************************
-
 # Purpose:
 # Estimate river volume globally from SWOT observations
 # Author:
 # Jeffrey Wade, 2024
 
+
 # ******************************************************************************
 # Import Python modules
 # ******************************************************************************
 import sys
+import os
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
-
-
-# ******************************************************************************
-# Set input and output filepaths
-# ******************************************************************************
-# swot_in = '/Users/jwade/jpl/computing/swot_volume/input/SWOT/global_obs/'\
-#     'swot_pfaf_45_2023-10-01_2024-09-30.csv'
-
-# V_out = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/V_EIV/'\
-#     'swot_vol_pfaf_45_2023-10-01_2024-09-30.csv'
-
-# fit_out = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/EIV_fits/'\
-#     'swot_vol_fits_45_2023-10-01_2024-09-30.csv'
 
 
 # ******************************************************************************
@@ -66,12 +54,16 @@ except IOError:
 # Import FLaPE-Byrd ReachObservations function
 # ******************************************************************************
 print('Importing volume function')
-# Import fitting functions
-sys.path.append('../')
-from src.FLaPE_Byrd_main_jw.ReachObservations_jw import ReachObservations
+# Check if the code is running in a script or interactive session
+if '__file__' in globals():  # Running as a script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+else:
+    script_dir = os.getcwd()
 
-# sys.path.append('/Users/jwade/jpl/computing/swot_volume/src/')
-# from FLaPE_Byrd_main_jw.ReachObservations_jw import ReachObservations
+src_dir = os.path.abspath(os.path.join(script_dir, '.', 'src'))
+sys.path.append(src_dir)
+from FLaPE_Byrd_main_jw.ReachObservations_jw import ReachObservations
+
 
 '''
 Required inputs to ReachObservations class

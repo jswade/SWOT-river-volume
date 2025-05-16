@@ -1,29 +1,32 @@
 #!/bin/bash
 #*****************************************************************************
-#swot_vol.sh
+#tst_pub_repr_all_Wade_etal_2025.sh
 #*****************************************************************************
-
 #Purpose:
-#This script reproduces analysis steps to compute changes in river storage
-#from SWOT reach observations globally.
+#This script reproduces all pre- and post-processing steps used in the
+#writing of:
 
 #DOI: xx.xxxx/xxxxxxxxxxxx
-#The files used are available from:
 
 #Zenodo
-#DOI:
+#DOI: XXXXXX
+#The following are the possible arguments:
+# - No argument: all unit tests are run
+# - One unique unit test number: this test is run
+# - Two unit test numbers: all tests between those (included) are run
 #The script returns the following exit codes
 # - 0  if all downloads are successful
 # - 22 if there was a conversion problem
 # - 44 if one download is not successful
 #Author:
-#Jeffrey Wade, Cedric H. David, 2024.
+#Jeffrey Wade, Cedric H. David, 2025.
 
+#
 #*****************************************************************************
 #Publication message
 #*****************************************************************************
 echo "********************"
-echo "Reproducing files for: https://doi.org/xx.xxxx/xxxxxxxxx"
+echo "Reproducing files for: https://doi.org/xx.xxxx/xxxxxxxxxxxx"
 echo "********************"
 
 
@@ -31,7 +34,7 @@ echo "********************"
 #Select which unit tests to perform based on inputs to this shell script
 #*****************************************************************************
 #Perform all unit tests if no options are given
-tot=12
+tot=23
 if [ "$#" = "0" ]; then
      fst=1
      lst=$tot
@@ -209,18 +212,18 @@ echo "Running unit test $unt/$tot"
 
 run_file=tmp_run_$unt.txt
 
-mkdir -p "../output/SWOT/V_EIV"
-mkdir -p "../output/SWOT/EIV_fits"
+mkdir -p "../output/V_EIV"
+mkdir -p "../output/EIV_fits"
 
 echo "- Fitting EIV Regressions"
 for ((i = 0; i < ${#pfaf[@]}; i++)); do
 
     echo $i
 
-    ../src/swot_volume_FLaPE-Byrd_global.py                                    \
-        ../input/SWOT/global_obs/swot_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv\
-        ../output/SWOT/V_EIV/swot_vol_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv\
-        ../output/SWOT/EIV_fits/swot_vol_fits_${pfaf[i]}_2023-10-01_2024-09-30.csv\
+    ../src/swot_volume_FLaPE-Byrd.py                                           \
+        ../input/SWOT/swot_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv           \
+        ../output/V_EIV/swot_vol_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv     \
+        ../output/EIV_fits/swot_vol_fits_${pfaf[i]}_2023-10-01_2024-09-30.csv  \
         > $run_file
     x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
@@ -241,17 +244,17 @@ echo "Running unit test $unt/$tot"
 
 run_file=tmp_run_$unt.txt
 
-mkdir -p "../output/SWOT/V_anom"
+mkdir -p "../output/V_anom"
 
 echo "- Calculating SWOT Volume Anomalies"
 for ((i = 0; i < ${#pfaf[@]}; i++)); do
 
     echo $i
 
-    ../src/swot_volume_anomaly_global.py                                       \
-        ../output/SWOT/V_EIV/swot_vol_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv\
-        ../input/SWOT/global_obs/swot_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv\
-        ../output/SWOT/V_anom/V_anom_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv \
+    ../src/swot_volume_anomaly.py                                       \
+        ../output/V_EIV/swot_vol_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv\
+        ../input/SWOT/swot_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv\
+        ../output/V_anom/V_anom_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv \
         > $run_file
     x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
@@ -272,22 +275,22 @@ echo "Running unit test $unt/$tot"
 
 run_file=tmp_run_$unt.txt
 
-mkdir -p "../output/SWOT/MeanDRS_comp/SWOT"
-mkdir -p "../output/SWOT/MeanDRS_comp/MeanDRS"
+mkdir -p "../output/MeanDRS_comp/SWOT"
+mkdir -p "../output/MeanDRS_comp/MeanDRS"
 
 echo "- Comparing SWOT and MeanDRS volumes"
 for ((i = 0; i < ${#pfaf[@]}; i++)); do
 
     echo $i
 
-    ../src/meandrs_volume_comp_global.py                                       \
-        ../output/SWOT/V_anom/V_anom_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv \
+    ../src/meandrs_volume_comp.py                                       \
+        ../output/V_anom/V_anom_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv \
         ../input/MERIT-SWORD/ms_translate/sword_to_mb/sword_to_mb_pfaf_${pfaf[i]}_translate.nc\
         ../input/MERIT-Basins/                                                 \
         ../input/MeanDRS/cor/V/                                                \
         ../input/SWORD/SWORD_reaches_v16/                                      \
-        ../output/SWOT/MeanDRS_comp/SWOT/V_SWOT_comp_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv\
-        ../output/SWOT/MeanDRS_comp/MeanDRS/V_MeanDRS_comp_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv\
+        ../output/MeanDRS_comp/SWOT/V_SWOT_comp_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv\
+        ../output/MeanDRS_comp/MeanDRS/V_MeanDRS_comp_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv\
         > $run_file
     x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
@@ -308,15 +311,15 @@ echo "Running unit test $unt/$tot"
 
 run_file=tmp_run_$unt.txt
 
-mkdir -p "../output/SWOT/global_summary/MeanDRS_comp/regional"
-mkdir -p "../output/SWOT/global_summary/MeanDRS_comp/global"
+mkdir -p "../output/global_summary/MeanDRS_comp/regional"
+mkdir -p "../output/global_summary/MeanDRS_comp/global"
 
 echo "- Aggregating MeanDRS volume comparison across regions"
 ../src/meandrs_volume_comp_summary.py                                          \
-    ../output/SWOT/MeanDRS_comp/SWOT/                                          \
-    ../output/SWOT/MeanDRS_comp/MeanDRS/                                       \
-    ../output/SWOT/global_summary/MeanDRS_comp/regional/                       \
-    ../output/SWOT/global_summary/MeanDRS_comp/global/MeanDRS_comp_global_summary.csv\
+    ../output/MeanDRS_comp/SWOT/                                          \
+    ../output/MeanDRS_comp/MeanDRS/                                       \
+    ../output/global_summary/MeanDRS_comp/regional/                       \
+    ../output/global_summary/MeanDRS_comp/global/MeanDRS_comp_global_summary.csv\
     > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
@@ -335,19 +338,19 @@ echo "Running unit test $unt/$tot"
 
 run_file=tmp_run_$unt.txt
 
-mkdir -p "../output/SWOT/MeanDRS_scale"
+mkdir -p "../output/MeanDRS_scale"
 
 echo "- Calculating MeanDRS volume anomalies at reach subsets"
 for ((i = 0; i < ${#pfaf[@]}; i++)); do
 
     echo $i
 
-    ../src/meandrs_volume_scale_global.py                                      \
+    ../src/meandrs_volume_scale.py                                      \
         ../input/MERIT-SWORD/ms_translate/sword_to_mb/sword_to_mb_pfaf_${pfaf[i]}_translate.nc\
         ../input/MERIT-Basins/                                                 \
         ../input/MeanDRS/cor/V/                                                \
         ../input/SWORD/SWORD_reaches_v16/                                      \
-        ../output/SWOT/MeanDRS_scale/V_SWOT_scale_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv\
+        ../output/MeanDRS_scale/V_SWOT_scale_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv\
         > $run_file
     x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
@@ -368,16 +371,16 @@ echo "Running unit test $unt/$tot"
 
 run_file=tmp_run_$unt.txt
 
-mkdir -p "../output/SWOT/global_summary/MeanDRS_scale/regional"
-mkdir -p "../output/SWOT/global_summary/MeanDRS_scale/global"
+mkdir -p "../output/global_summary/MeanDRS_scale/regional"
+mkdir -p "../output/global_summary/MeanDRS_scale/global"
 
 echo "- Aggregating MeanDRS volume comparison across regions"
 ../src/meandrs_volume_scale_summary.py                                         \
-    ../output/SWOT/MeanDRS_comp/SWOT/                                          \
-    ../output/SWOT/MeanDRS_comp/MeanDRS/                                       \
-    ../output/SWOT/MeanDRS_scale/                                              \
-    ../output/SWOT/global_summary/MeanDRS_scale/regional/                      \
-    ../output/SWOT/global_summary/MeanDRS_scale/global/MeanDRS_scale_global_summary.csv\
+    ../output/MeanDRS_comp/SWOT/                                          \
+    ../output/MeanDRS_comp/MeanDRS/                                       \
+    ../output/MeanDRS_scale/                                              \
+    ../output/global_summary/MeanDRS_scale/regional/                      \
+    ../output/global_summary/MeanDRS_scale/global/MeanDRS_scale_global_summary.csv\
     > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
@@ -396,20 +399,20 @@ echo "Running unit test $unt/$tot"
 
 run_file=tmp_run_$unt.txt
 
-mkdir -p "../output/SWOT/MeanDRS_slice/"
+mkdir -p "../output/MeanDRS_slice/"
 
 echo "- Comparing SWOT and MeanDRS volumes by yearly slice"
 for ((i = 0; i < ${#pfaf[@]}; i++)); do
 
     echo $i
 
-    ../src/meandrs_volume_slice_global.py                                      \
-        ../output/SWOT/V_anom/V_anom_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv \
+    ../src/meandrs_volume_slice.py                                      \
+        ../output/V_anom/V_anom_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv \
         ../input/MERIT-SWORD/ms_translate/sword_to_mb/sword_to_mb_pfaf_${pfaf[i]}_translate.nc\
         ../input/MERIT-Basins/                                                 \
         ../input/MeanDRS/cor/V/                                                \
         ../input/SWORD/SWORD_reaches_v16/                                      \
-        ../output/SWOT/MeanDRS_slice/V_SWOT_slice_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv\
+        ../output/MeanDRS_slice/V_SWOT_slice_pfaf_${pfaf[i]}_2023-10-01_2024-09-30.csv\
         > $run_file
     x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
@@ -430,12 +433,12 @@ echo "Running unit test $unt/$tot"
 
 run_file=tmp_run_$unt.txt
 
-mkdir -p "../output/SWOT/global_summary/MeanDRS_slice"
+mkdir -p "../output/global_summary/MeanDRS_slice"
 
 echo "- Aggregating MeanDRS volume slices across regions"
 ../src/meandrs_volume_slice_summary.py                                         \
-    ../output/SWOT/MeanDRS_slice/                                              \
-    ../output/SWOT/global_summary/MeanDRS_slice/MeanDRS_slice_global_summary.csv\
+    ../output/MeanDRS_slice/                                              \
+    ../output/global_summary/MeanDRS_slice/MeanDRS_slice_global_summary.csv\
     > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 rm -f $run_file
@@ -453,14 +456,14 @@ echo "Running unit test $unt/$tot"
 
 run_file=tmp_run_$unt.txt
 
-mkdir -p "../output/SWOT/global_summary/MeanDRS_agree"
+mkdir -p "../output/global_summary/MeanDRS_agree"
 
 echo "- Assessing SWOT-MeanDRS agreement"
 ../src/meandrs_volume_agreement.py                                             \
-    ../output/SWOT/global_summary/MeanDRS_comp/regional/                       \
-    ../output/SWOT/global_summary/MeanDRS_comp/global/MeanDRS_comp_global_summary.csv\
-    ../output/SWOT/global_summary/MeanDRS_agree/MeanDRS_agree_global_mag_ratio.csv\
-    ../output/SWOT/global_summary/MeanDRS_agree/MeanDRS_agree_global_corr.csv  \
+    ../output/global_summary/MeanDRS_comp/regional/                       \
+    ../output/global_summary/MeanDRS_comp/global/MeanDRS_comp_global_summary.csv\
+    ../output/global_summary/MeanDRS_agree/MeanDRS_agree_global_mag_ratio.csv\
+    ../output/global_summary/MeanDRS_agree/MeanDRS_agree_global_corr.csv  \
     > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 rm -f $run_file
@@ -478,13 +481,13 @@ echo "Running unit test $unt/$tot"
 
 run_file=tmp_run_$unt.txt
 
-mkdir -p "../output/SWOT/SWORD_reach_anom"
+mkdir -p "../output/SWORD_reach_anom"
 
 echo "- Pairing SWOT anomalies to SWORD shapefiles"
 ../src/swot_volume_reach_shp.py                                                \
-    ../output/SWOT/V_anom/                                                     \
+    ../output/V_anom/                                                     \
     ../input/SWORD/SWORD_reaches_v16/                                          \
-    ../output/SWOT/SWORD_reach_anom/                                           \
+    ../output/SWORD_reach_anom/                                           \
     > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 rm -f $run_file
@@ -501,14 +504,14 @@ echo "Running unit test $unt/$tot"
 
 run_file=tmp_run_$unt.txt
 
-mkdir -p "../output/SWOT/n_obs"
+mkdir -p "../output/n_obs"
 
 echo "- Assess proportion of reaches with SWOT volumes"
 ../src/swot_num_obs.py                                                         \
-    ../output/SWOT/V_anom/                                                     \
+    ../output/V_anom/                                                     \
     ../input/MERIT-SWORD/ms_translate/sword_to_mb/                             \
     ../input/SWORD/SWORD_reaches_v16/                                          \
-    ../output/SWOT/n_obs/swot_n_obs.csv                                        \
+    ../output/n_obs/swot_n_obs.csv                                        \
     > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
@@ -529,12 +532,12 @@ run_file=tmp_run_$unt.txt
 
 echo "- Generating plots"
 ../src/swot_volume_plots.py                                                    \
-    ../output/SWOT/global_summary/MeanDRS_comp/regional/                       \
-    ../output/SWOT/global_summary/MeanDRS_comp/global/MeanDRS_comp_global_summary.csv\
-    ../output/SWOT/global_summary/MeanDRS_scale/regional/                      \
-    ../output/SWOT/global_summary/MeanDRS_scale/global/MeanDRS_scale_global_summary.csv\
-    ../output/SWOT/MeanDRS_slice/                                              \
-    ../output/SWOT/global_summary/MeanDRS_slice/MeanDRS_slice_global_summary.csv\
+    ../output/global_summary/MeanDRS_comp/regional/                       \
+    ../output/global_summary/MeanDRS_comp/global/MeanDRS_comp_global_summary.csv\
+    ../output/global_summary/MeanDRS_scale/regional/                      \
+    ../output/global_summary/MeanDRS_scale/global/MeanDRS_scale_global_summary.csv\
+    ../output/MeanDRS_slice/                                              \
+    ../output/global_summary/MeanDRS_slice/MeanDRS_slice_global_summary.csv\
     > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 

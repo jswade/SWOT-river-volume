@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # ******************************************************************************
-# meandrs_volume_comp_global.py
+# meandrs_volume_comp.py
 # ******************************************************************************
 
 # Purpose:
@@ -27,11 +27,11 @@ import xarray as xr
 # # ******************************************************************************
 # # Set volume anomaly file path
 # V_anom_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#     'V_anom/V_anom_pfaf_62_2023-10-01_2024-09-30.csv'
+#     'V_anom/V_anom_pfaf_11_2023-10-01_2024-09-30.csv'
 
 # # Set file path to SWORD to MeanDRS translations
 # ms_in = '/Users/jwade/jpl/computing/swot_volume/input/MERIT-SWORD/'\
-#     'ms_translate/sword_to_mb/sword_to_mb_pfaf_62_translate.nc'
+#     'ms_translate/sword_to_mb/sword_to_mb_pfaf_11_translate.nc'
 
 # # Set file path to MERIT-Basins shapefiles
 # mb_in = '/Users/jwade/jpl/computing/swot_volume/input/MERIT-Basins/'
@@ -45,10 +45,10 @@ import xarray as xr
 
 # # Set output file path for volume anomalies
 # swot_anom_out = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#     'MeanDRS_comp/SWOT/V_SWOT_comp_pfaf_62_2023-10-01_2024-09-30.csv'
+#     'MeanDRS_comp/SWOT/V_SWOT_comp_pfaf_11_2023-10-01_2024-09-30.csv'
 
 # meandrs_anom_out = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#     'MeanDRS_comp/MeanDRS/V_MeanDRS_comp_pfaf_62_2023-10-01_2024-09-30.csv'
+#     'MeanDRS_comp/MeanDRS/V_MeanDRS_comp_pfaf_11_2023-10-01_2024-09-30.csv'
 
 
 # ******************************************************************************

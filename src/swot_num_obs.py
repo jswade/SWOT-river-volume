@@ -18,7 +18,6 @@ import numpy as np
 import geopandas as gpd
 import glob
 import xarray as xr
-import matplotlib.pyplot as plt
 
 
 ## ******************************************************************************
@@ -183,28 +182,6 @@ for i in range(len(V_anom_all)):
 
 # Sort based on number of SWORD reaches
 obs_df = obs_df.sort_values(by="sword", ascending=True).reset_index(drop='True')
-
-# Plot bar plot of number of reaches observed
-plt.rcParams["font.family"] = "Arial"
-plt.rcParams["svg.fonttype"] = "none"
-plt.rcParams['font.size'] = 12
-plt.figure(figsize=(12, 6))
-plt.bar(np.arange(len(obs_df)), obs_df.sword, width=0.6, color='#9E95CB',
-        edgecolor='black', label="All SWORD Reaches", zorder=1)
-plt.bar(np.arange(len(obs_df)), obs_df.sw_type1, width=0.6, color='#FF463B',
-        edgecolor='black', label="Sword Type 1+5 Reaches", zorder=2)
-plt.bar(np.arange(len(obs_df)), obs_df.V_anom, width=0.6, color='#1741bf',
-        edgecolor='black', label="Obs. SWORD Reaches", zorder=3)
-plt.bar(np.arange(len(obs_df)), obs_df.V_anom_ms, width=0.6, color='#3FB9DE',
-        edgecolor='black', label="Obs. SWORD Reaches with Translation",
-        zorder=3)
-plt.xlim([-.5, 60.5])
-plt.ylim([0, 20000])
-plt.ylabel('Number of Reaches', fontsize=13)
-plt.xlabel('Pfaf Region', fontsize=13)
-plt.xticks(ticks=np.arange(len(obs_df)), labels=obs_df.pfaf, rotation=90)
-plt.legend()
-plt.show()
 
 # Write to file
 obs_df.to_csv(obs_out, index=False)

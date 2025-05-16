@@ -18,19 +18,6 @@ import numpy as np
 import glob
 import geopandas as gpd
 
-#
-## ******************************************************************************
-## Set input file paths
-## ******************************************************************************
-## Set input file path for volume anomalies
-#anom_reg_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/V_anom/'
-#
-#sword_in = '/Users/jwade/jpl/computing/swot_volume/input/SWORD/'\
-#    'SWORD_reaches_v16/'
-#
-#sword_out = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#    'SWORD_reach_anom/'
-
 
 # ******************************************************************************
 # Declaration of variables (given as command line arguments)
@@ -64,11 +51,12 @@ except IOError:
     raise SystemExit(22)
 
 try:
-    with open(sword_in) as file:
+    if os.path.isdir(sword_in):
         pass
 except IOError:
-    print('ERROR - Unable to open ' + sword_in)
+    print('ERROR - '+sword_in+' invalid folder path')
     raise SystemExit(22)
+
 
 try:
     if os.path.isdir(sword_out):
@@ -109,8 +97,10 @@ sword_files = pd.Series(sword_files)[sw_pfaf_list.index.values].tolist()
 sword_all = [gpd.read_file(x) for x in sword_files]
 
 # Add placeholder file at pfaf 54 for missing file
-sword_all.insert(35, [])
-sword_files.insert(35, [])
+# Allow for testing in single region
+if len(sword_all) > 1:
+    sword_all.insert(35, [])
+    sword_files.insert(35, [])
 
 # ******************************************************************************
 # Calculate volume anomaly amplitude at each reach

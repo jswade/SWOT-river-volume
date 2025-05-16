@@ -20,6 +20,8 @@
 input/
 output/
 output_test/
+output_testing/
+input_testing/
 
 
 #-------------------------------------------------------------------------------

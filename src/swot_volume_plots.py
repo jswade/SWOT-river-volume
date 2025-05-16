@@ -16,15 +16,10 @@ import sys
 import pandas as pd
 import numpy as np
 import glob
-import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
-from matplotlib.colors import ListedColormap, BoundaryNorm
 import geopandas as gpd
 import cartopy.crs as ccrs
-from shapely.geometry import Polygon, MultiPolygon
-import cartopy
-import cartopy.feature as cfeature
 
 
 # # ******************************************************************************
@@ -55,17 +50,20 @@ import cartopy.feature as cfeature
 # corr_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/global_summary/'\
 #     'MeanDRS_agree/MeanDRS_agree_global_corr.csv'
 
-# world_in = '/Users/jwade/jpl/computing/swot_volume/figures/'\
-#     'global_variability_maps/shp/ne_110m_land/ne_110m_land_antarctica.shp'
+# world_in = '/Users/jwade/jpl/computing/swot_volume/input/'\
+#     'natural_earth/ne_110m_land/ne_110m_land_antarctica.shp'
 
-# grat_in = '/Users/jwade/jpl/computing/swot_volume/figures/'\
-#     'global_variability_maps/shp/ne_50m_graticules_30/ne_50m_graticules_30.shp'
+# grat_in = '/Users/jwade/jpl/computing/swot_volume/input/'\
+#     'natural_earth/ne_50m_graticules_30/ne_50m_graticules_30.shp'
 
-# pfaf_in = '/Users/jwade/jpl/computing/swot_volume/figures/'\
-#     'global_variability_maps/shp/pfaf_region/hybas_global_lev02_v1c.shp'
-    
+# pfaf_in = '/Users/jwade/jpl/computing/swot_volume/input/'\
+#     'hybas_global/hybas_global_lev02_v1c.shp'
+
 # sword_anom_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
 #     'SWORD_reach_anom/'
+
+# num_obs_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/n_obs/'\
+#     'swot_n_obs.csv'
 
 
 # ******************************************************************************
@@ -83,13 +81,14 @@ import cartopy.feature as cfeature
 # 10 - grat_in
 # 11 - pfaf_in
 # 12 - sword_anom_in
+# 13 - num_obs_in
 
 # ******************************************************************************
 # Get command line arguments
 # ******************************************************************************
 IS_arg = len(sys.argv)
-if IS_arg != 13:
-    print('ERROR - 12 arguments must be used')
+if IS_arg != 14:
+    print('ERROR - 13 arguments must be used')
     raise SystemExit(22)
 
 comp_reg_in = sys.argv[1]
@@ -104,6 +103,7 @@ world_in = sys.argv[9]
 grat_in = sys.argv[10]
 pfaf_in = sys.argv[11]
 sword_anom_in = sys.argv[12]
+num_obs_in = sys.argv[13]
 
 
 # ******************************************************************************
@@ -193,6 +193,13 @@ except IOError:
     print('ERROR - '+sword_anom_in+' invalid folder path')
     raise SystemExit(22)
 
+try:
+    with open(num_obs_in) as file:
+        pass
+except IOError:
+    print('ERROR - Unable to open ' + num_obs_in)
+    raise SystemExit(22)
+
 
 # ******************************************************************************
 # Read files
@@ -271,6 +278,10 @@ grat = grat.to_crs("EPSG:4326")
 # Sort pfaf region file by pfaf id
 pfaf = pfaf.sort_values(by='PFAF_ID').reset_index(drop=True)
 
+# ------------------------------------------------------------------------------
+# Number of Observations
+# ------------------------------------------------------------------------------
+obs_df = pd.read_csv(num_obs_in)
 
 # ******************************************************************************
 # Create plots
@@ -791,7 +802,7 @@ cbar.set_ticklabels([f'{tick:.1f}' for tick in bins])
 plt.show()
 
 # ------------------------------------------------------------------------------
-# Best Lag Correlation with  SWOT vs MeanDR
+# Best Lag Correlation with SWOT vs MeanDR
 # ------------------------------------------------------------------------------
 # Duplicate value of Pfaf 35, as the Pfaf 35 is split by the anitmeridian
 corr_best_lag = pd.concat([diff_corr.best_lag[:22],
@@ -833,4 +844,29 @@ cbar = plt.colorbar(sm, ax=ax, orientation='vertical', shrink=0.85)
 cbar.set_label('Optimal Absolute Lag, Months \nSWOT vs MeanDRS',)
 cbar.set_ticks(bins)
 cbar.set_ticklabels([f'{tick:.2f}' for tick in bins])
+plt.show()
+
+# ------------------------------------------------------------------------------
+# Number of Observations by region
+# ------------------------------------------------------------------------------
+# Plot bar plot of number of reaches observed
+plt.rcParams["font.family"] = "Arial"
+plt.rcParams["svg.fonttype"] = "none"
+plt.rcParams['font.size'] = 12
+plt.figure(figsize=(12, 6))
+plt.bar(np.arange(len(obs_df)), obs_df.sword, width=0.6, color='#9E95CB',
+        edgecolor='black', label="All SWORD Reaches", zorder=1)
+plt.bar(np.arange(len(obs_df)), obs_df.sw_type1, width=0.6, color='#FF463B',
+        edgecolor='black', label="Sword Type 1+5 Reaches", zorder=2)
+plt.bar(np.arange(len(obs_df)), obs_df.V_anom, width=0.6, color='#1741bf',
+        edgecolor='black', label="Obs. SWORD Reaches", zorder=3)
+plt.bar(np.arange(len(obs_df)), obs_df.V_anom_ms, width=0.6, color='#3FB9DE',
+        edgecolor='black', label="Obs. SWORD Reaches with Translation",
+        zorder=3)
+plt.xlim([-.5, 60.5])
+plt.ylim([0, 20000])
+plt.ylabel('Number of Reaches', fontsize=13)
+plt.xlabel('Pfaf Region', fontsize=13)
+plt.xticks(ticks=np.arange(len(obs_df)), labels=obs_df.pfaf, rotation=90)
+plt.legend()
 plt.show()
