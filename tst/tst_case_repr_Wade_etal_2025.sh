@@ -116,7 +116,7 @@ fi
 #../src/tst_cmp.py                                                              \
 #    ../output_testing/EIV_fits/swot_vol_fits_${pfaf}_2023-10-01_2024-09-30.csv \
 #    ../output_test/EIV_fits/swot_vol_fits_${pfaf}_2023-10-01_2024-09-30.csv    \
-#    > $cmp_file
+#    > $cmp_file 2>&1
 #    
 #cat $cmp_file
 #x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -152,7 +152,7 @@ echo "- Comparing SWOT volume anomalies (.csv)"
 ../src/tst_cmp.py                                                              \
         ../output_testing/V_anom/V_anom_pfaf_${pfaf}_2023-10-01_2024-09-30.csv \
         ../output_test/V_anom/V_anom_pfaf_${pfaf}_2023-10-01_2024-09-30.csv    \
-    > $cmp_file
+    > $cmp_file 2>&1
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 rm -f $cmp_file
@@ -191,14 +191,14 @@ echo "- Comparing SWOT volume for MeanDRS comparison (.csv)"
 ../src/tst_cmp.py                                                              \
     ../output_testing/MeanDRS_comp/SWOT/V_SWOT_comp_pfaf_${pfaf}_2023-10-01_2024-09-30.csv\
     ../output_test/MeanDRS_comp/SWOT/V_SWOT_comp_pfaf_${pfaf}_2023-10-01_2024-09-30.csv\
-    > $cmp_file
+    > $cmp_file 2>&1
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing MeanDRS volume for SWOT comparison (.csv)"
 ../src/tst_cmp.py                                                              \
     ../output_testing/MeanDRS_comp/MeanDRS/V_MeanDRS_comp_pfaf_${pfaf}_2023-10-01_2024-09-30.csv\
     ../output_test/MeanDRS_comp/MeanDRS/V_MeanDRS_comp_pfaf_${pfaf}_2023-10-01_2024-09-30.csv\
-    > $cmp_file
+    > $cmp_file 2>&1
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 rm -f $cmp_file
@@ -234,7 +234,7 @@ echo "- Comparing MeanDRS-SWOT comparison (.csv)"
 ../src/tst_cmp.py                                                              \
     ../output_testing/global_summary/MeanDRS_comp/global/MeanDRS_comp_global_summary.csv\
     ../output_test/global_summary/MeanDRS_comp/global/MeanDRS_comp_global_summary.csv\
-    > $cmp_file
+    > $cmp_file 2>&1
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 rm -f $cmp_file
@@ -270,7 +270,7 @@ echo "- Comparing scaled SWOT anomaly (.csv)"
 ../src/tst_cmp.py                                                              \
     ../output_testing/MeanDRS_scale/V_SWOT_scale_pfaf_${pfaf}_2023-10-01_2024-09-30.csv\
     ../output_test/MeanDRS_scale/V_SWOT_scale_pfaf_${pfaf}_2023-10-01_2024-09-30.csv\
-    > $cmp_file
+    > $cmp_file 2>&1
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 rm -f $cmp_file
@@ -307,7 +307,7 @@ echo "- Comparing aggregated scaled SWOT anomaly (.csv)"
 ../src/tst_cmp.py                                                              \
     ../output_testing/global_summary/MeanDRS_scale/global/MeanDRS_scale_global_summary.csv\
     ../output_test/global_summary/MeanDRS_scale/global/MeanDRS_scale_global_summary.csv\
-    > $cmp_file
+    > $cmp_file 2>&1
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 rm -f $cmp_file
@@ -344,7 +344,7 @@ echo "- Comparing SWOT-MeanDRS yearly slices (.csv)"
 ../src/tst_cmp.py                                                              \
     ../output_testing/MeanDRS_slice/V_SWOT_slice_pfaf_${pfaf}_2023-10-01_2024-09-30.csv\
     ../output_test/MeanDRS_slice/V_SWOT_slice_pfaf_${pfaf}_2023-10-01_2024-09-30.csv\
-    > $cmp_file
+    > $cmp_file 2>&1
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 rm -f $cmp_file
@@ -377,7 +377,7 @@ echo "- Comparing aggregated SWOT-MeanDRS yearly slices (.csv)"
 ../src/tst_cmp.py                                                              \
     ../output_testing/global_summary/MeanDRS_slice/MeanDRS_slice_global_summary.csv\
     ../output_test/global_summary/MeanDRS_slice/MeanDRS_slice_global_summary.csv\
-    > $cmp_file
+    > $cmp_file 2>&1
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 rm -f $cmp_file
@@ -412,14 +412,14 @@ echo "- Comparing agreement magnitude ratio (.csv)"
 ../src/tst_cmp.py                                                              \
     ../output_testing/global_summary/MeanDRS_agree/MeanDRS_agree_global_mag_ratio.csv\
     ../output_test/global_summary/MeanDRS_agree/MeanDRS_agree_global_mag_ratio.csv\
-    > $cmp_file
+    > $cmp_file 2>&1
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing agreement correlation (.csv)"
 ../src/tst_cmp.py                                                              \
     ../output_testing/global_summary/MeanDRS_agree/MeanDRS_agree_global_corr.csv\
     ../output_test/global_summary/MeanDRS_agree/MeanDRS_agree_global_corr.csv\
-    > $cmp_file
+    > $cmp_file 2>&1
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 rm -f $cmp_file
@@ -453,7 +453,7 @@ echo "- Comparing SWORD anomaly shapefiles (.csv)"
 ../src/tst_cmp.py                                                              \
     ../output_testing/SWORD_reach_anom/SWORD_obs_anom_pfaf_${pfaf}.shp         \
     ../output_test/SWORD_reach_anom/SWORD_obs_anom_pfaf_${pfaf}.shp            \
-    > $cmp_file
+    > $cmp_file 2>&1
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 rm -f $cmp_file
@@ -488,7 +488,7 @@ echo "- Comparing SWORD anomaly shapefiles (.csv)"
 ../src/tst_cmp.py                                                              \
     ../output_testing/n_obs/swot_n_obs.csv                                     \
     ../output_test/n_obs/swot_n_obs.csv                                        \
-    > $cmp_file
+    > $cmp_file 2>&1
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 rm -f $cmp_file
