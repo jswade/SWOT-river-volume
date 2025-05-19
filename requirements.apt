@@ -46,8 +46,7 @@ ffmpeg
 #multimedia file transcoding
 nco
 #netCDF operators
-gdal
-python3-gdal
+libgdal-dev
 
 #-------------------------------------------------------------------------------
 #Code testing

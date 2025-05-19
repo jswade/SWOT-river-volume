@@ -33,15 +33,18 @@ RUN  apt-get update && \
 #*******************************************************************************
 #Python requirements
 #*******************************************************************************
+ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
+ENV C_INCLUDE_PATH=/usr/include/gdal
 ENV PATH="/venv/bin:$PATH"
 RUN python3 -m venv /venv
 ADD https://bootstrap.pypa.io/pip/get-pip.py .
 RUN /venv/bin/python get-pip.py --no-cache-dir \
-        $(grep 'pip==' requirements.pip) \
-        $(grep 'setuptools==' requirements.pip) \
-        $(grep 'wheel==' requirements.pip) && \
+    $(grep '^pip==' requirements.pip) \
+    $(grep '^setuptools==' requirements.pip) \
+    $(grep '^wheel==' requirements.pip) && \
     rm get-pip.py
 RUN /venv/bin/pip install --no-cache-dir -r requirements.pip
+
 
 #*******************************************************************************
 #Intended (default) command at execution of image (not used during build)
