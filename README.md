@@ -1,5 +1,5 @@
 # SWOT-river-volume
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15428292)](https://doi.org/10.5281/zenodo.15428292)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15428292.svg)](https://doi.org/10.5281/zenodo.15428292)
 
 [![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-yellow.svg)](https://github.com/jswade/SWOT-river-volume/blob/main/LICENSE)
 
@@ -9,13 +9,15 @@
 
 [![GitHub CD Status](https://github.com/jswade/SWOT-river-volume/actions/workflows/github_actions_CD.yml/badge.svg)](https://github.com/jswade/SWOT-river-volume/actions/workflows/github_actions_CD.yml)
 
-SWOT-river-volume is a collection of Python and bash shell scripts that ...
+SWOT-river-volume is a collection of Python and bash shell scripts that transforms global observations of river water surface elevation and width provided by the Surface Water and Ocean Topography (SWOT) mission into estimates of river water storage variability worldwide. We provide the first observationally-derived global river water storage estimates from the first year of SWOT's orbit along 126,674 reaches in the SWOT River Database (SWORD; Altenau et al., 2021). We also compare SWOT's observations of global river variability to current best estimates of river volume obtained through river routing simulations (MeanDRS, Collins et al., 2024).
 
 SWOT-river-volume aims to:
 
-1.  
-2.  
-3.  
+1. Downloads and prepares SWOT width and height observations for volume estimation.
+
+2. Computes river volume variability from SWOT observations using river hypsometry.
+
+3. Provides comparisons between SWOT-derived river volume estimates and MeanDRS volume simulations worldwide.
 
 The SWOT-river-volume dataset is publicly available at https://zenodo.org/records/15428292.
 
@@ -44,20 +46,6 @@ The Python scripts in the `/src/` folder represent individual computational step
 obtain river volume estimates from SWOT observations. Many of the Python scripts are 
 run in loops by the `/tst/` scripts for each unique Pfafstetter region. Here, the scripts
 are listed in order of their use in the analysis.
-
-**`swot_dwnl_hydrocron.py`**  
-Downloads SWOT L2 HR River Single Pass observations within target region between specified
-dates using NASA PODAAC's Hydrocron service. 
-
-  * Inputs:  
-    * Shapefile of input SWORD reaches (`.shp`)  
-    * Starting date of study period (`str`)  
-    * Ending date of study period (`str`)  
-
-  * Outputs:  
-    * File containing downloaded SWOT reach observations (`.csv`)  
-
-&nbsp;  
 
 **`swot_dwnl_hydrocron.py`**  
 Downloads SWOT L2 HR River Single Pass observations within target region between specified
@@ -319,10 +307,10 @@ $ sudo apt-get install -y --no-install-recommends $(grep -v -E '(^#|^$)' require
 > one by one, for example:
 >
 > ```
-> $ sudo apt-get install -y --no-install-recommends python3.9
+> $ sudo apt-get install -y --no-install-recommends python3.11
 >```
 
-Also make sure that `python3` points to `python3.9`:
+Also make sure that `python3` points to `python3.11`:
 
 ```
 $ sudo rm -f /usr/bin/python3
