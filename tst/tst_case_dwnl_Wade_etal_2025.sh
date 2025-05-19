@@ -10,7 +10,7 @@
 #DOI: XXX
 
 #Zenodo
-#DOI:
+#DOI: 10.5281/zenodo.15428292
 #The script returns the following exit codes
 # - 0  if all downloads are successful
 # - 22 if there was a conversion problem
@@ -30,7 +30,7 @@ echo "********************"
 #Publication message
 #*****************************************************************************
 echo "********************"
-echo "Downloading files from:   https://doi.org/XXXXX"
+echo "Downloading files from:   https://doi.org/10.5281/zenodo.15428292"
 echo "which correspond to   :   https://doi.org/xx.xxxx/xxxxxxxxxxxx"
 echo "These files are under a CC BY-NC-SA 4.0 license."
 echo "Please cite these two DOIs if using these files for your publications."

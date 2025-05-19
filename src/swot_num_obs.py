@@ -20,24 +20,6 @@ import glob
 import xarray as xr
 
 
-## ******************************************************************************
-## Set input file paths
-## ******************************************************************************
-## Set volume anomaly file path
-#V_anom_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/V_anom/'
-#
-## Set file path to SWORD to MeanDRS translations
-#ms_in = '/Users/jwade/jpl/computing/swot_volume/input/MERIT-SWORD/'\
-#    'ms_translate/sword_to_mb/'
-#
-## Set file path to SWORD reach file
-#sword_in = '/Users/jwade/jpl/computing/swot_volume/input/SWORD/'\
-#    'SWORD_reaches_v16/'
-#
-#obs_out = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/n_obs/'\
-#    'swot_n_obs.csv'
-
-
 # ******************************************************************************
 # Declaration of variables (given as command line arguments)
 # ******************************************************************************

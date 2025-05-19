@@ -25,17 +25,6 @@ import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 
 
-# # ******************************************************************************
-# # Set input file paths
-# # ******************************************************************************
-# # Set volume anomaly file path
-# slice_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/MeanDRS_slice/'
-
-# # Set output file path for volume anomalies slices
-# slice_out = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#     'global_summary/MeanDRS_slice/MeanDRS_slice_global_summary.csv'
-
-
 # ******************************************************************************
 # Declaration of variables (given as command line arguments)
 # ******************************************************************************

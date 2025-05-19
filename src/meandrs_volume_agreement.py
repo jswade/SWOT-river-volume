@@ -19,23 +19,6 @@ import glob
 from scipy.signal import correlate
 
 
-# # ******************************************************************************
-# # Set input file paths
-# # ******************************************************************************
-# # Set input file path for volume anomalies
-# comp_reg_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#     'global_summary/MeanDRS_comp/regional/'
-
-# comp_global_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#     'global_summary/MeanDRS_comp/global/MeanDRS_comp_global_summary.csv'
-
-# mag_out = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/global_summary/'\
-#     'MeanDRS_agree/MeanDRS_agree_global_mag_ratio.csv'
-
-# corr_out = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/global_summary/'\
-#     'MeanDRS_agree/MeanDRS_agree_global_corr.csv'
-
-
 # ******************************************************************************
 # Declaration of variables (given as command line arguments)
 # ******************************************************************************

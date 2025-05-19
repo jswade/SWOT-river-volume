@@ -22,19 +22,6 @@ import fiona
 import earthaccess
 
 
-# # ******************************************************************************
-# # Set file paths
-# # ******************************************************************************
-# sword_in = '/Users/jwade/jpl/computing/swot_volume/input/SWORD/'\
-#     'SWORD_reaches_v16/na_sword_reaches_hb74_v16.shp'
-
-# date1 = '2023-10-01'
-# date2 = '2024-09-30'
-
-# swot_out = '/Users/jwade/jpl/computing/swot_volume/input/SWOT/global_obs/'\
-#     'swot_pfaf_74_2023-10-01_2024-09-30.csv'
-
-
 # ******************************************************************************
 # Declaration of variables (given as command line arguments)
 # ******************************************************************************

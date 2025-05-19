@@ -22,50 +22,6 @@ import geopandas as gpd
 import cartopy.crs as ccrs
 
 
-# # ******************************************************************************
-# # Set input file paths
-# # ******************************************************************************
-# # Set input file path for volume anomalies
-# comp_reg_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#     'global_summary/MeanDRS_comp/regional/'
-
-# comp_global_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#     'global_summary/MeanDRS_comp/global/MeanDRS_comp_global_summary.csv'
-
-# scale_reg_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#     'global_summary/MeanDRS_scale/regional/'
-
-# scale_global_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#     'global_summary/MeanDRS_scale/global/MeanDRS_scale_global_summary.csv'
-
-# slice_reg_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#     'MeanDRS_slice/'
-
-# slice_global_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#     'global_summary/MeanDRS_slice/MeanDRS_slice_global_summary.csv'
-
-# mag_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/global_summary/'\
-#     'MeanDRS_agree/MeanDRS_agree_global_mag_ratio.csv'
-
-# corr_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/global_summary/'\
-#     'MeanDRS_agree/MeanDRS_agree_global_corr.csv'
-
-# world_in = '/Users/jwade/jpl/computing/swot_volume/input/'\
-#     'natural_earth/ne_110m_land/ne_110m_land_antarctica.shp'
-
-# grat_in = '/Users/jwade/jpl/computing/swot_volume/input/'\
-#     'natural_earth/ne_50m_graticules_30/ne_50m_graticules_30.shp'
-
-# pfaf_in = '/Users/jwade/jpl/computing/swot_volume/input/'\
-#     'hybas_global/hybas_global_lev02_v1c.shp'
-
-# sword_anom_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#     'SWORD_reach_anom/'
-
-# num_obs_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/n_obs/'\
-#     'swot_n_obs.csv'
-
-
 # ******************************************************************************
 # Declaration of variables (given as command line arguments)
 # ******************************************************************************
@@ -82,6 +38,7 @@ import cartopy.crs as ccrs
 # 11 - pfaf_in
 # 12 - sword_anom_in
 # 13 - num_obs_in
+
 
 # ******************************************************************************
 # Get command line arguments

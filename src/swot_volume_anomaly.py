@@ -18,22 +18,6 @@ from datetime import datetime, timedelta
 
 
 # ******************************************************************************
-# Set input file paths
-# ******************************************************************************
-# # Set volume file path
-# V_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/V_EIV/'\
-#     'swot_vol_pfaf_11_2023-10-01_2024-09-30.csv'
-
-# # Set SWOT observation input
-# swot_in = '/Users/jwade/jpl/computing/swot_volume/input/SWOT/global_obs/'\
-#     'swot_pfaf_11_2023-10-01_2024-09-30.csv'
-
-# # Set volume anomaly output files
-# V_anom_out = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/V_anom/'\
-#     'V_anom_pfaf_11_2023-10-01_2024-09-30.csv'
-
-
-# ******************************************************************************
 # Declaration of variables (given as command line arguments)
 # ******************************************************************************
 # 1 - V_in

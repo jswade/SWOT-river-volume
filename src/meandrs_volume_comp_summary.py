@@ -20,24 +20,6 @@ import glob
 import matplotlib.pyplot as plt
 
 
-# # ******************************************************************************
-# # Set input file paths
-# # ******************************************************************************
-# # Set volume anomaly file path
-# swot_anom_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#     'MeanDRS_comp/SWOT/'
-
-# meandrs_anom_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#     'MeanDRS_comp/MeanDRS/'
-
-# # Set output file path for volume anomalies
-# comp_reg_out = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#     'global_summary/MeanDRS_comp/regional/'
-
-# comp_global_out = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#     'global_summary/MeanDRS_comp/global/MeanDRS_comp_global_summary.csv'
-
-
 # ******************************************************************************
 # Declaration of variables (given as command line arguments)
 # ******************************************************************************

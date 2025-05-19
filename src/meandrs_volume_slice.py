@@ -21,32 +21,6 @@ import glob
 import xarray as xr
 
 
-# # ******************************************************************************
-# # Set input file paths
-# # ******************************************************************************
-# # Set volume anomaly file path
-# V_anom_in = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/V_anom/'\
-#     'V_anom_pfaf_11_2023-10-01_2024-09-30.csv'
-
-# # Set file path to SWORD to MeanDRS translations
-# ms_in = '/Users/jwade/jpl/computing/swot_volume/input/MERIT-SWORD/'\
-#     'ms_translate/sword_to_mb/sword_to_mb_pfaf_11_translate.nc'
-
-# # Set file path to MERIT-Basins shapefiles
-# mb_in = '/Users/jwade/jpl/computing/swot_volume/input/MERIT-Basins/'
-
-# # Set file path to MeanDRS volume simulations
-# mV_in = '/Users/jwade/jpl/computing/swot_volume/input/MeanDRS/cor/V/'
-
-# # Set file path to SWORD reach file
-# sword_in = '/Users/jwade/jpl/computing/swot_volume/input/SWORD/'\
-#     'SWORD_reaches_v16/'
-
-# # Set output filepath
-# slice_out = '/Users/jwade/jpl/computing/swot_volume/output/SWOT/'\
-#     'MeanDRS_slice/V_MeanDRS_slice_pfaf_11_2023-10-01_2024-09-30.csv'
-
-
 # ******************************************************************************
 # Declaration of variables (given as command line arguments)
 # ******************************************************************************
