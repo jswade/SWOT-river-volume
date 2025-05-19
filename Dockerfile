@@ -33,14 +33,10 @@ RUN  apt-get update && \
 #*******************************************************************************
 #Python requirements
 #*******************************************************************************
-ADD https://bootstrap.pypa.io/pip/get-pip.py .
-RUN python3 get-pip.py --no-cache-dir \
-    `grep 'pip==' requirements.pip` \
-    `grep 'setuptools==' requirements.pip` \
-    `grep 'wheel==' requirements.pip` && \
-    rm get-pip.py
-
-RUN pip3 install --no-cache-dir -r requirements.pip
+ENV PATH="/venv/bin:$PATH"
+RUN python3 -m venv /venv/ && \
+    pip3 install --no-cache-dir -r requirements.pip && \
+    pip3 install --no-cache-dir . &&
 
 
 #*******************************************************************************
