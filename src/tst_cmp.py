@@ -17,6 +17,7 @@
 import sys
 import filecmp
 import pathlib
+import numpy as np
 
 
 # ******************************************************************************
