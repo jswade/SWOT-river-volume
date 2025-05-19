@@ -59,6 +59,185 @@ dates using NASA PODAAC's Hydrocron service.
 
 &nbsp;  
 
+**`swot_dwnl_hydrocron.py`**  
+Downloads SWOT L2 HR River Single Pass observations within target region between specified
+dates using NASA PODAAC's Hydrocron service. 
+
+  * Inputs:  
+    * Shapefile of input SWORD reaches (`.shp`)  
+    * Starting date of study period (`str`)  
+    * Ending date of study period (`str`)  
+
+  * Outputs:  
+    * File containing downloaded SWOT reach observations (`.csv`)  
+
+&nbsp;  
+
+**`swot_volume_FLaPE-Byrd.py`**  
+Estimates river volume from SWOT observations of river height and width using scripts from the
+FLaPE-Byrd repository (https://github.com/mikedurand/FLaPE-Byrd).
+
+  * Inputs:  
+    * File of SWOT observations within a given region (`.csv`)
+
+  * Outputs:  
+    * File containing SWOT-derived river volume estimates at each reach in a given region (`.csv`)
+    * File containing river hypsometry fit parameters at each reach in a given region (`.csv`)  
+
+&nbsp;  
+
+**`swot_volume_anomaly.py`**  
+Calculates the river volume anomaly at each reach from SWOT estimates of river volume.
+
+  * Inputs:  
+    * File containing SWOT-derived river volume estimates at each reach in a given region (`.csv`)
+    * File containing downloaded SWOT reach observations (`.csv`)
+    
+  * Outputs:  
+    * File containing SWOT river volume anomalies at each reach in a given region (`.csv`)  
+
+&nbsp;  
+
+**`meandrs_volume_comp.py`**  
+Retrieves river volume simulations from the MeanDRS dataset at reaches corresponding to those 
+observed by SWOT for comparison to SWOT-derived volume estimates.
+
+  * Inputs:  
+    * File containing SWOT river volume anomalies at each reach in a given region (`.csv`)  
+    * File containing MERIT-Basins to SWORD reach translations from the MERIT-SWORD dataset (`.csv`)
+    * Folder containing MERIT-Basins reach shapefiles (`.shp`) 
+    * Folder containing bias-corrected MeanDRS simulations of river volume (`.nc`)
+    * Folder containing SWORD reach shapefiles (`.shp`)
+
+  * Outputs:  
+    * File containing total SWOT volume estimates at reaches comparable to MeanDRS in a given region (`.csv`)  
+    * File containing total MeanDRS volume simulations at reaches comparable to SWORD in a given region (`.csv`)  
+
+&nbsp;  
+
+**`meandrs_volume_comp_summary.py`**  
+Summarizes regional SWOT and MeanDRS volume estimates for global comparison.
+
+  * Inputs:  
+    * Folder containing aggregated SWOT river volume estimates in a given region (`.csv`)
+    * Folder containing aggregated MeanDRS volume simulations in a given region (`.csv`)  
+    
+  * Outputs:  
+    * File containing comparable SWOT and MeanDRS volume estimates in a given region (`.csv`)  
+    * File containing comparable SWOT and MeanDRS volume estimates aggregated globally (`.csv`)  
+
+&nbsp;  
+
+**`meandrs_volume_scale.py`**  
+Retrieves MeanDRS volume simulations to compute scaling factors for adjusting observed SWOT volume estimates 
+to account for unobserved SWORD reaches.
+
+  * Inputs:  
+    * File containing MERIT-Basins to SWORD reach translations from the MERIT-SWORD dataset (`.csv`)
+    * Folder containing MERIT-Basins reach shapefiles (`.shp`) 
+    * Folder containing bias-corrected MeanDRS simulations of river volume (`.nc`)
+    * Folder containing SWORD reach shapefiles (`.shp`)
+
+  * Outputs:  
+    * File containing MeanDRS volume simulations used to compute SWOT volume scaling factors (`.csv`)  
+
+&nbsp;  
+
+**`meandrs_volume_scale_summary.py`**  
+Scales observed SWOT volume estimates to account for unobserved SWORD reaches and aggregates volumes globally.
+
+  * Inputs:  
+    * Folder containing aggregated SWOT river volume estimates in a given region (`.csv`)  
+    * Folder containing aggregated MeanDRS volume simulations in a given region (`.csv`) 
+    * File containing MeanDRS volume simulations used to compute SWOT volume scaling factors (`.csv`)  
+
+  * Outputs:  
+    * File containing scaled SWOT volume estimates in a given region (`.csv`) 
+    * File containing scaled SWOT volume estimates aggregated globally (`.csv`)  
+
+&nbsp;  
+
+**`meandrs_volume_slice.py`**  
+Retrieves annual slices of the 30-yr record of MeanDRS volume simulations to align with SWOT volume estimates.
+
+  * Inputs:  
+    * File containing SWOT river volume anomalies at each reach in a given region (`.csv`) 
+    * File containing MERIT-Basins to SWORD reach translations from the MERIT-SWORD dataset (`.csv`)
+    * Folder containing MERIT-Basins reach shapefiles (`.shp`)
+    * Folder containing bias-corrected MeanDRS simulations of river volume (`.nc`)
+    * Folder containing SWORD reach shapefiles (`.shp`)
+    
+  * Outputs:  
+    * File containing annual slices of MeanDRS volume simulations aligned with SWOT volume estimates for a given region (`.csv`)  
+
+&nbsp;  
+
+**`meandrs_volume_slice_summary.py`**  
+Aggregates annual slices of MeanDRS volume simulations and comparable SWOT volume estimates globally.
+
+  * Inputs:  
+    * Folder containing annual slices of MeanDRS volume simulations aligned with SWOT volume estimates for a given region (`.csv`)  
+
+  * Outputs:  
+    * File containing annual slices of MeanDRS volume simulations aggregated globally (`.csv`)  
+
+&nbsp;  
+
+**`meandrs_volume_agreement.py`**  
+Quantitatively assesses the agreement between MeanDRS volume simulations and SWOT volume estimates at 
+comparable reaches.
+
+  * Inputs:  
+    * File containing comparable SWOT and MeanDRS volume estimates in a given region (`.csv`)  
+    * File containing comparable SWOT and MeanDRS volume estimates aggregated globally (`.csv`)  
+    
+  * Outputs:  
+    * File containing the ratios of variability magnitudes between SWOT and MeanDRS volume estimates (`.csv`)
+    * File containing correlations between SWOT and MeanDRS volume estimates (`.csv`)  
+
+&nbsp;  
+
+**`swot_volume_reach_shp.py`**  
+Pairs SWOT volume anomalies to SWORD shapefiles for visualization.
+
+  * Inputs:  
+    * Folder containing SWOT river volume anomalies at each reach in a given region (`.csv`)  
+    * Folder containing SWORD reach shapefiles (`.shp`)
+    
+  * Outputs:  
+    * Folder containing SWORD shapefiles with joined SWOT volume anomalies (`.shp`)  
+
+&nbsp;  
+
+**`swot_num_obs.py`**  
+Assess the proportion of SWORD reaches with sufficient SWOT observations for volume computation in each region.
+
+  * Inputs:  
+    * Folder containing SWOT river volume anomalies at each reach in a given region (`.csv`) 
+    * File containing MERIT-Basins to SWORD reach translations from the MERIT-SWORD dataset (`.csv`)
+    * Folder containing SWORD reach shapefiles (`.shp`)
+
+  * Outputs:  
+    * File containing proportion of SWORD reaches with sufficient SWOT observations for volume computation (`.csv`)  
+
+&nbsp;  
+
+**`swot_volume_plots.py`**  
+Produces visualizations of global SWOT river volume estimates and comparisons to MeanDRS volume simulations.
+
+  * Inputs:  
+    * Folder containing comparable SWOT and MeanDRS volume estimates in a given region (`.csv`)  
+    * File containing comparable SWOT and MeanDRS volume estimates aggregated globally (`.csv`)  
+    * Folder containing scaled SWOT volume estimates in a given region (`.csv`) 
+    * File containing scaled SWOT volume estimates aggregated globally (`.csv`) 
+    * Folder containing annual slices of MeanDRS volume simulations aligned with SWOT volume estimates for a given region (`.csv`)  
+    * File containing annual slices of MeanDRS volume simulations aggregated globally (`.csv`)  
+
+  * Outputs:  
+    * Matplotlib Visualizations
+
+&nbsp;  
+
 ## Installation with Docker
 Installing SWOT-river-volume is **by far the easiest with Docker**. This document was
 written and tested using
