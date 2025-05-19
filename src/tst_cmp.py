@@ -120,20 +120,20 @@ def compare_csvs(file_org, file_tst):
 #        print("Differences:\n", diff)
 #        return df1.equals(df2)
 #        assert_frame_equal(df1, df2, check_dtype=False, check_exact=False, rtol=0, atol=1e-3)
-        assert_frame_equal(df1, df2, check_dtype=False, check_exact=False, rtol=0, atol=1)
+        assert_frame_equal(df1, df2, check_dtype=False, check_exact=False, rtol=0, atol=1e-3)
         return True
     except Exception as e:
         print("ERROR comparing CSVs:", e)
-        # Compute boolean mask of where values are too different
-        diffs = (df1 - df2).abs()
-        tolerance = 0 + 1 * df2.abs()
-        mask = (diffs > tolerance)
-
-        # Show only cells that failed tolerance
-        violated = df1[mask]
-        print("\n🔍 Cells where difference exceeds tolerance:")
-        print(violated.stack().rename("df1"))
-        print(df2[mask].stack().rename("df2"))
+#        # Compute boolean mask of where values are too different
+#        diffs = (df1 - df2).abs()
+#        tolerance = 0 + 1 * df2.abs()
+#        mask = (diffs > tolerance)
+#
+#        # Show only cells that failed tolerance
+#        violated = df1[mask]
+#        print("\n🔍 Cells where difference exceeds tolerance:")
+#        print(violated.stack().rename("df1"))
+#        print(df2[mask].stack().rename("df2"))
         return False
 
 
