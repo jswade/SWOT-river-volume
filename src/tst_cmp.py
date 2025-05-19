@@ -111,8 +111,8 @@ def compare_csvs(file_org, file_tst):
     try:
         df1 = pd.read_csv(file_org).sort_index(axis=1)
         df2 = pd.read_csv(file_tst).sort_index(axis=1)
-        diff = df1.compare(df2, keep_shape=True, keep_equal=False)
-        print("Differences:\n", diff)
+#        diff = df1.compare(df2, keep_shape=True, keep_equal=False)
+#        print("Differences:\n", diff)
 #        return df1.equals(df2)
 #        assert_frame_equal(df1, df2, check_dtype=False, check_exact=False, rtol=0, atol=1e-3)
         assert_frame_equal(df1, df2, check_dtype=False, check_exact=False, rtol=0, atol=1)
