@@ -19,6 +19,8 @@
 input/
 output/
 output_test/
+input_testing/
+output_testing/
 
 
 #-------------------------------------------------------------------------------

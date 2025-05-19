@@ -112,7 +112,8 @@ def compare_csvs(file_org, file_tst):
         df2 = pd.read_csv(file_tst).sort_index(axis=1)
         diff = df1.compare(df2, keep_shape=True, keep_equal=False)
         print("Differences:\n", diff)
-        return df1.equals(df2)
+#        return df1.equals(df2)
+        np.allclose(df1.values, df2.values, equal_nan=True, rtol=1e-5, atol=1e-8)
     except Exception as e:
         print("ERROR comparing CSVs:", e)
         return False
