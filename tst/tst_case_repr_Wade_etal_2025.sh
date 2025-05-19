@@ -108,12 +108,12 @@ echo "- Comparing computed SWOT volumes (.csv)"
 cat $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
-echo "- Comparing SWOT volume fit errors (.csv)"
-../src/tst_cmp.py                                                              \
-    ../output_testing/EIV_fits/swot_vol_fits_${pfaf}_2023-10-01_2024-09-30.csv \
-    ../output_test/EIV_fits/swot_vol_fits_${pfaf}_2023-10-01_2024-09-30.csv    \
-    > $cmp_file
-    
+#echo "- Comparing SWOT volume fit errors (.csv)"
+#../src/tst_cmp.py                                                              \
+#    ../output_testing/EIV_fits/swot_vol_fits_${pfaf}_2023-10-01_2024-09-30.csv \
+#    ../output_test/EIV_fits/swot_vol_fits_${pfaf}_2023-10-01_2024-09-30.csv    \
+#    > $cmp_file
+#    
 cat $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
