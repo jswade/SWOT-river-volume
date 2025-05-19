@@ -32,6 +32,7 @@ zip
 #Code building
 #-------------------------------------------------------------------------------
 python3.11-dev
+python3.11-venv
 #Includes binary libraries (python3.11) and header files (python3.11-dev)
 python3-distutils
 #python3 support for building and installing additional modules
