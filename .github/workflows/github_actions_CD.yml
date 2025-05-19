@@ -87,8 +87,8 @@ jobs:
               push: true
               platforms: linux/amd64,linux/arm64
               tags: |
-                 ${{ secrets.DOCKER_HUB_NAME }}/SWOT-river-volume:latest
-                 ${{ secrets.DOCKER_HUB_NAME }}/SWOT-river-volume:${{ github.ref_name }}
+                 ${{ secrets.DOCKER_HUB_NAME }}/swot-river-volume:latest
+                 ${{ secrets.DOCKER_HUB_NAME }}/swot-river-volume:${{ github.ref_name }}
                  
 
 #*******************************************************************************
