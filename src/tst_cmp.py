@@ -114,7 +114,7 @@ def compare_csvs(file_org, file_tst):
         diff = df1.compare(df2, keep_shape=True, keep_equal=False)
         print("Differences:\n", diff)
 #        return df1.equals(df2)
-        assert_frame_equal(df1, df2, check_dtype=False, check_exact=False, rtol=1e-5, atol=2e-5)
+        assert_frame_equal(df1, df2, check_dtype=False, check_exact=False, rtol=0, atol=1e-4)
     except Exception as e:
         print("ERROR comparing CSVs:", e)
         return False
