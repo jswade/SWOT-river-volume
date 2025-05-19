@@ -120,7 +120,8 @@ def compare_csvs(file_org, file_tst):
 #        print("Differences:\n", diff)
 #        return df1.equals(df2)
 #        assert_frame_equal(df1, df2, check_dtype=False, check_exact=False, rtol=0, atol=1e-3)
-        return assert_frame_equal(df1, df2, check_dtype=False, check_exact=False, rtol=0, atol=1)
+        assert_frame_equal(df1, df2, check_dtype=False, check_exact=False, rtol=0, atol=1)
+        return True
     except Exception as e:
         print("ERROR comparing CSVs:", e)
         # Compute boolean mask of where values are too different

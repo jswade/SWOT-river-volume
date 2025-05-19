@@ -103,7 +103,7 @@ echo "- Comparing computed SWOT volumes (.csv)"
 ../src/tst_cmp.py                                                              \
     ../output_testing/V_EIV/swot_vol_pfaf_${pfaf}_2023-10-01_2024-09-30.csv    \
     ../output_test/V_EIV/swot_vol_pfaf_${pfaf}_2023-10-01_2024-09-30.csv       \
-    > $cmp_file
+    > $cmp_file 2>&1
 x=$?
 cat $cmp_file
 if [ $x -gt 0 ] ; then
