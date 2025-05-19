@@ -46,7 +46,6 @@ ffmpeg
 #multimedia file transcoding
 nco
 #netCDF operators
-libgdal-dev
 
 #-------------------------------------------------------------------------------
 #Code testing

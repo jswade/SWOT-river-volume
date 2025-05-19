@@ -10,15 +10,13 @@
 # ******************************************************************************
 # Import Python modules
 # ******************************************************************************
-import os
 import sys
-import glob
 import requests
 import io
 from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
-import fiona
+import geopandas as gpd
 import earthaccess
 
 
@@ -70,7 +68,7 @@ print('Reading files')
 # SWORD reach file
 # ------------------------------------------------------------------------------
 # Load sword reach file
-sword_i = fiona.open(sword_in, 'r', crs="EPSG:4326")
+sword_i = gpd.read_file(sword_in, crs="EPSG:4326")
 
 # Retrieve pfaf numbers from file
 pfaf_num = sword_in.partition("reaches_hb")[-1][0:2]
@@ -89,7 +87,7 @@ swot_vars = 'reach_id,time,wse,wse_u,wse_r_u,width,width_u,'\
 base_date = datetime(2000, 1, 1)
 
 # Read reach ids
-rch_id = np.array([int(x['properties']['reach_id']) for x in sword_i])
+rch_id = sword_i.reach_id
 
 # Remove ghost reaches (type 6)
 rch_type = np.array([x % 10 for x in rch_id])
