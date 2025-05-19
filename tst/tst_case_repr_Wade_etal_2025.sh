@@ -99,10 +99,10 @@ echo "- Fitting EIV Regressions"
     > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing SWOT volume fits (.csv)"
+echo "- Comparing computed SWOT volumes (.csv)"
 ../src/tst_cmp.py                                                              \
-    ../output_testing/EIV_fits/swot_vol_fits_${pfaf}_2023-10-01_2024-09-30.csv \
-    ../output_test/EIV_fits/swot_vol_fits_${pfaf}_2023-10-01_2024-09-30.csv    \
+    ../output_testing/V_EIV/swot_vol_${pfaf}_2023-10-01_2024-09-30.csv \
+    ../output_test/V_EIV/swot_vol_${pfaf}_2023-10-01_2024-09-30.csv    \
     > $cmp_file
     
 cat $cmp_file
@@ -113,6 +113,8 @@ echo "- Comparing SWOT volume fit errors (.csv)"
     ../output_testing/EIV_fits/swot_vol_fits_${pfaf}_2023-10-01_2024-09-30.csv \
     ../output_test/EIV_fits/swot_vol_fits_${pfaf}_2023-10-01_2024-09-30.csv    \
     > $cmp_file
+    
+cat $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 rm -f $cmp_file
