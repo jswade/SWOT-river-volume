@@ -1,5 +1,5 @@
 # SWOT-river-volume
-[![DOI](https://zenodo.org/badge/DOI/xxxxx)](https://doi.org/xxxxx)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15428292)](https://doi.org/10.5281/zenodo.15428292)
 
 [![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-yellow.svg)](https://github.com/jswade/SWOT-river-volume/blob/main/LICENSE)
 
@@ -17,7 +17,47 @@ SWOT-river-volume aims to:
 2.  
 3.  
 
-The SWOT-river-volume dataset is publicly available at https://zenodo.org/records/xxxx.
+The SWOT-river-volume dataset is publicly available at https://zenodo.org/records/15428292.
+
+## Shell Script Documentation
+The shell scripts in the `/tst/` folder sequentially call Python scripts by providing
+the required input files and pointing to the desired output locations.
+
+**`tst_case_dwnl_Wade_etal_2025.sh`**  
+This script is used to download testing data
+from Zenodo for a limited region for automated testing on key functions in SWOT-river-volume.
+
+**`tst_case_repr_Wade_etal_2025.sh`**  
+This script is used to perform individual computations and compare the results to expected outputs for automated testing of key functions in SWOT-river-volume.
+
+**`tst_pub_dwnl_all_Wade_etal_2025.sh`**  
+This script is used to download all input data
+to recreate the DSWx-width analysis in its entirety. If executed, this script will take 
+and extremely long time to run, as it is downloading a large volume of SWOT data.
+
+**`tst_pub_repr_all_Wade_etal_2025.sh`**  
+This script is used to recreate the outputs of 
+the SWOT-river-volume analysis in its entirety.
+
+## Python Script Documentation  
+The Python scripts in the `/src/` folder represent individual computational steps used to 
+obtain river volume estimates from SWOT observations. Many of the Python scripts are 
+run in loops by the `/tst/` scripts for each unique Pfafstetter region. Here, the scripts
+are listed in order of their use in the analysis.
+
+**`swot_dwnl_hydrocron.py`**  
+Downloads SWOT L2 HR River Single Pass observations within target region between specified
+dates using NASA PODAAC's Hydrocron service. 
+
+  * Inputs:  
+    * Shapefile of input SWORD reaches (`.shp`)  
+    * Starting date of study period (`str`)  
+    * Ending date of study period (`str`)  
+
+  * Outputs:  
+    * File containing downloaded SWOT reach observations (`.csv`)  
+
+&nbsp;  
 
 ## Installation with Docker
 Installing SWOT-river-volume is **by far the easiest with Docker**. This document was
