@@ -54,7 +54,7 @@ jobs:
       #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       #Checkout SWOT-river-volume code
       #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-         - name: Checkout SWOT-river-volume code
+         - name: Checkout swot-river-volume code
            uses: actions/checkout@v4
 
       #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
