@@ -39,6 +39,7 @@ python3-distutils
 g++
 #includes C (gcc) and C++ (g++) compilers
 libgdal-dev
+gdal-bin
 #files needed to develop a software that use GDAL/OGR
 libspatialindex-dev
 #spatial indexing methods, needed for rtree
