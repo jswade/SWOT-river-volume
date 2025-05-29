@@ -240,6 +240,7 @@ pfaf = pfaf.sort_values(by='PFAF_ID').reset_index(drop=True)
 # ------------------------------------------------------------------------------
 obs_df = pd.read_csv(num_obs_in)
 
+
 # ******************************************************************************
 # Create plots
 # ******************************************************************************
@@ -250,7 +251,8 @@ print('Creating plots')
 # Plot monthly means and standard deviation envelopes
 plt.rcParams["font.family"] = "Arial"
 plt.rcParams["svg.fonttype"] = "none"
-plt.figure()
+plt.rcParams['font.size'] = 11
+plt.figure(figsize=(110/25.4, 90/25.4))
 plt.plot(comp_df.mV_low_anom_mean, label='Low', color='#61742bff', zorder=6)
 plt.fill_between(comp_df.index,
                  comp_df.mV_low_anom_mean - comp_df.mV_low_anom_std,
@@ -267,14 +269,14 @@ plt.fill_between(comp_df.index,
                  comp_df.mV_hig_anom_mean + comp_df.mV_hig_anom_std,
                  color='#e2d9ee', alpha=.7, label='Hig Std', zorder=1)
 plt.plot(comp_df.V_SWOT, label='SWOT', color='black', zorder=7, linewidth=3)
-plt.ylabel('Volume Anomaly, km³', fontname='Arial', fontsize=13)
+plt.ylabel('River Storage Anomaly, km³', fontname='Arial', fontsize=12)
 plt.legend(prop={'family': 'Arial', 'size': 12}, loc='upper left')
 plt.axhline(0, color='gray', linestyle='--', alpha=0.5)
 comp_dates = pd.to_datetime(comp_df.dates).dt.strftime('%m-%y')
 plt.xticks(ticks=range(0, 12), labels=comp_dates)
 plt.xticks(ticks=range(len(comp_dates)), labels=comp_dates)
-plt.xticks(rotation=45, fontname='Arial', fontsize=12)
-plt.yticks(fontname='Arial', fontsize=12)
+plt.xticks(rotation=45, fontname='Arial', fontsize=11)
+plt.yticks(fontname='Arial', fontsize=11)
 plt.tight_layout()
 plt.setp(plt.gca().get_xticklabels(), ha='right', rotation_mode='anchor')
 plt.xlim([0, len(comp_dates) - 1])
@@ -283,10 +285,7 @@ plt.gca().spines['top'].set_zorder(10)
 plt.gca().spines['right'].set_zorder(10)
 plt.gca().spines['bottom'].set_zorder(10)
 plt.gca().spines['left'].set_zorder(10)
-plt.savefig('/Users/jwade/jpl/computing/swot_volume/figures/'
-            'global_MeanDRS_comp/global_MeanDRS_comp_raw.svg',
-            format='svg', metadata={'Creator': 'Matplotlib'})
-
+plt.ylim([-1000, 1000])
 
 # ------------------------------------------------------------------------------
 # Regional SWOT Anomaly vs MeanDRS Mean Volume Anomaly
@@ -325,8 +324,8 @@ for i in range(len(comp_reg_all)):
                      label='Hig Std', zorder=1)
     plt.plot(comp_reg_all[i].V_SWOT, label='SWOT',
              color='black', zorder=7, linewidth=3)
-    plt.ylabel('Volume Anomaly, km³', fontname='Arial', fontsize=13)
-    plt.title('SWOT vs MeanDRS Volume: Pfaf ' + pfaf_list[i])
+    plt.ylabel('River Storage Anomaly, km³', fontname='Arial', fontsize=13)
+    plt.title('SWOT vs MeanDRS RSA: Pfaf ' + pfaf_list[i])
     plt.legend(prop={'family': 'Arial', 'size': 12}, loc='upper left')
     plt.axhline(0, color='gray', linestyle='--', alpha=0.5)
     comp_dates = pd.to_datetime(comp_reg_all[i].dates).dt.strftime('%m-%y')
@@ -349,15 +348,15 @@ for i in range(len(comp_reg_all)):
 # Plot scaled SWOT volume anomalies
 plt.rcParams["font.family"] = "Arial"
 plt.rcParams["svg.fonttype"] = "none"
-plt.rcParams['font.size'] = 12
-plt.figure()
-plt.plot(scale_df.V_SWOT, label='SWOT (Observed)', color='black', linewidth=3,
+plt.rcParams['font.size'] = 11
+plt.figure(figsize=(110/25.4, 90/25.4))
+plt.plot(scale_df.V_SWOT, label='Observed SWOT RSA', color='black', linewidth=3,
          zorder=3)
-plt.plot(scale_df.V_SWOT_ms, label='SWOT (Scaled)',
+plt.plot(scale_df.V_SWOT_ms, label='Scaled SWOT RSA',
          color='#c63741',
          linewidth=2,
          zorder=2)
-plt.ylabel('Volume Anomaly, km³', fontsize=13)
+plt.ylabel('River Storage Anomaly, km³', fontsize=12)
 plt.legend()
 plt.axhline(0, color='gray', linestyle='--', alpha=0.5)
 swot_dates_format = pd.to_datetime(scale_df.dates).dt.strftime('%m-%y')
@@ -382,7 +381,7 @@ for i in range(len(scale_reg_all)):
              color='#c63741',
              linewidth=2,
              zorder=2)
-    plt.ylabel('Volume Anomaly, km³', fontsize=13)
+    plt.ylabel('River Storage Anomaly, km³', fontsize=13)
     plt.legend()
     plt.axhline(0, color='gray', linestyle='--', alpha=0.5)
     swot_dates_format = pd.to_datetime(scale_reg_all[i].dates).\
@@ -401,8 +400,8 @@ for i in range(len(scale_reg_all)):
 # MeanDRS Low Volume Scenario
 plt.rcParams["font.family"] = "Arial"
 plt.rcParams["svg.fonttype"] = "none"
-plt.rcParams['font.size'] = 12
-plt.figure()
+plt.rcParams['font.size'] = 11
+plt.figure(figsize=(110/25.4, 90/25.4))
 for j in range(60, 89):
     if j == 60:
         plt.plot(slice_df.index, slice_df.iloc[:, j],
@@ -412,7 +411,7 @@ for j in range(60, 89):
         plt.plot(slice_df.index, slice_df.iloc[:, j],
                  color='#61742bff', alpha=0.2)
 plt.plot(slice_df.V_SWOT, label='SWOT', color='black', linewidth=2)
-plt.ylabel('Volume Anomaly, km³', fontsize=13)
+plt.ylabel('River Storage Anomaly, km³', fontsize=13)
 plt.legend()
 plt.axhline(0, color='gray', linestyle='--', alpha=0.3)
 plt.xticks(ticks=range(0, 12), labels=swot_dates_format)
@@ -426,8 +425,8 @@ plt.tight_layout()
 # MeanDRS Normal Volume Scenario
 plt.rcParams["font.family"] = "Arial"
 plt.rcParams["svg.fonttype"] = "none"
-plt.rcParams['font.size'] = 12
-plt.figure()
+plt.rcParams['font.size'] = 11
+plt.figure(figsize=(130/25.4, 90/25.4))
 for j in range(31, 60):
     if j == 31:
         plt.plot(slice_df.index, slice_df.iloc[:, j],
@@ -436,7 +435,7 @@ for j in range(31, 60):
         plt.plot(slice_df.index, slice_df.iloc[:, j],
                  color='#2f6867', alpha=0.2)
 plt.plot(slice_df.V_SWOT, label='SWOT', color='black', linewidth=2)
-plt.ylabel('Volume Anomaly, km³', fontsize=13)
+plt.ylabel('River Storage Anomaly, km³', fontsize=13)
 plt.legend(loc='lower right')
 plt.axhline(0, color='gray', linestyle='--', alpha=0.3)
 plt.xticks(ticks=range(0, 12), labels=swot_dates_format)
@@ -450,8 +449,8 @@ plt.tight_layout()
 # MeanDRS High Volume Scenario
 plt.rcParams["font.family"] = "Arial"
 plt.rcParams["svg.fonttype"] = "none"
-plt.rcParams['font.size'] = 12
-plt.figure()
+plt.rcParams['font.size'] = 11
+plt.figure(figsize=(130/25.4, 90/25.4))
 for j in range(2, 31):
     if j == 2:
         plt.plot(slice_df.index, slice_df.iloc[:, j],
@@ -461,7 +460,7 @@ for j in range(2, 31):
         plt.plot(slice_df.index, slice_df.iloc[:, j],
                  color='#7549b3', alpha=0.2)
 plt.plot(slice_df.V_SWOT, label='SWOT', color='black', linewidth=2)
-plt.ylabel('Volume Anomaly, km³', fontsize=13)
+plt.ylabel('River Storage Anomaly, km³', fontsize=13)
 plt.legend()
 plt.axhline(0, color='gray', linestyle='--', alpha=0.3)
 plt.xticks(ticks=range(0, 12), labels=swot_dates_format)
@@ -483,7 +482,7 @@ for i in range(len(slice_reg_all)):
         plt.plot(slice_reg_all[i].index, slice_reg_all[i].iloc[:, j],
                  color='#61742bff', alpha=0.2)
     plt.plot(slice_reg_all[i].V_SWOT, label='SWOT', color='black', linewidth=2)
-    plt.ylabel('Volume Anomaly, km³', fontsize=13)
+    plt.ylabel('River Storage Anomaly, km³', fontsize=13)
     plt.title('SWOT Vol vs Annual Slices of Low MeanDRS Pfaf ' + pfaf_list[i])
     plt.legend()
     plt.axhline(0, color='gray', linestyle='--', alpha=0.3)
@@ -498,7 +497,7 @@ for i in range(len(slice_reg_all)):
         plt.plot(slice_reg_all[i].index, slice_reg_all[i].iloc[:, j],
                  color='red', alpha=0.2)
     plt.plot(slice_reg_all[i].V_SWOT, label='SWOT', color='black', linewidth=2)
-    plt.ylabel('Volume Anomaly, km³', fontsize=13)
+    plt.ylabel('River Storage Anomaly, km³', fontsize=13)
     plt.title('SWOT Vol vs Annual Slices of Med MeanDRS Pfaf ' + pfaf_list[i])
     plt.legend()
     plt.axhline(0, color='gray', linestyle='--', alpha=0.3)
@@ -513,7 +512,7 @@ for i in range(len(slice_reg_all)):
         plt.plot(slice_reg_all[i].index, slice_reg_all[i].iloc[:, j],
                  color='green', alpha=0.2)
     plt.plot(slice_reg_all[i].V_SWOT, label='SWOT', color='black', linewidth=2)
-    plt.ylabel('Volume Anomaly, km³', fontsize=13)
+    plt.ylabel('River Storage Anomaly, km³', fontsize=13)
     plt.title('SWOT Vol vs Annual Slices of Hig MeanDRS Pfaf ' + pfaf_list[i])
     plt.legend()
     plt.axhline(0, color='gray', linestyle='--', alpha=0.3)
@@ -548,8 +547,8 @@ norm_obs = mcolors.BoundaryNorm(boundaries=bins, ncolors=cust_cmap_obs.N)
 
 plt.rcParams["font.family"] = "Arial"
 plt.rcParams["svg.fonttype"] = "none"
-plt.rcParams['font.size'] = 12
-fig = plt.figure(figsize=(12, 6))
+plt.rcParams['font.size'] = 11
+fig = plt.figure(figsize=(180/25.4, 115/25.4))
 ax = plt.axes(projection=ccrs.Robinson())
 ax.set_global()
 grat.plot(ax=ax, transform=ccrs.PlateCarree(), linewidth=0.2, color='gray',
@@ -564,8 +563,8 @@ pfaf.plot(ax=ax, transform=ccrs.PlateCarree(), column=reg_V_dup,
           linewidth=0.4)
 sm = plt.cm.ScalarMappable(cmap=cust_cmap_obs, norm=norm_obs)
 sm.set_array([])
-cbar = plt.colorbar(sm, ax=ax, orientation='vertical', shrink=0.85)
-cbar.set_label('SWOT Observed River Storage \nVariability, km³')
+cbar = plt.colorbar(sm, ax=ax, orientation='vertical', shrink=0.67)
+cbar.set_label('River Storage Variability, km³')
 cbar.set_ticks(bins)
 cbar.set_ticklabels([f'{tick}' for tick in bins])
 plt.show()
@@ -580,8 +579,8 @@ norm_ms = mcolors.BoundaryNorm(boundaries=bins, ncolors=cust_cmap_ms.N)
 
 plt.rcParams["font.family"] = "Arial"
 plt.rcParams["svg.fonttype"] = "none"
-plt.rcParams['font.size'] = 12
-fig = plt.figure(figsize=(12, 6))
+plt.rcParams['font.size'] = 11
+fig = plt.figure(figsize=(180/25.4, 115/25.4))
 ax = plt.axes(projection=ccrs.Robinson())
 ax.set_global()
 grat.plot(ax=ax, transform=ccrs.PlateCarree(), linewidth=0.2, color='gray',
@@ -595,8 +594,8 @@ pfaf.plot(ax=ax, transform=ccrs.PlateCarree(), column=reg_V_ms_dup,
           norm=norm_ms, zorder=3, edgecolor='black', linewidth=0.4)
 sm = plt.cm.ScalarMappable(cmap=cust_cmap_ms, norm=norm_ms)
 sm.set_array([])
-cbar = plt.colorbar(sm, ax=ax, orientation='vertical', shrink=0.85)
-cbar.set_label('SWOT Scaled River Storage \nVariability, km³')
+cbar = plt.colorbar(sm, ax=ax, orientation='vertical', shrink=0.67)
+cbar.set_label('Scaled River Storage Variability, km³')
 cbar.set_ticks(bins)
 cbar.set_ticklabels([f'{tick}' for tick in bins])
 plt.show()
@@ -618,16 +617,16 @@ vol_df = vol_df.sort_values(by="V", ascending=True).reset_index(drop='True')
 # Plot bar plot of ranked storage variability
 plt.rcParams["font.family"] = "Arial"
 plt.rcParams["svg.fonttype"] = "none"
-plt.rcParams['font.size'] = 12
-plt.figure(figsize=(12, 6))
+plt.rcParams['font.size'] = 9
+fig = plt.figure(figsize=(200/25.4, 90/25.4))
 plt.bar(np.arange(len(vol_df)), vol_df.V_ms, width=0.6, color='#FF463B',
         edgecolor='black', label="SWOT (Scaled)", zorder=2)
 plt.bar(np.arange(len(vol_df)), vol_df.V, width=0.6, color='#3FB9DE',
         edgecolor='black', label="SWOT (Observed)", zorder=3)
 plt.xlim([-.5, 60.5])
-plt.ylim([0, 300])
-plt.ylabel("SWOT Volume Variability, km³", fontsize=13)
-plt.xlabel('Pfaf Region', fontsize=13)
+plt.ylim([0, 250])
+plt.ylabel("River Storage Variability, km³", fontsize=11)
+plt.xlabel('Pfaf Region', fontsize=11)
 plt.xticks(ticks=np.arange(len(vol_df)), labels=vol_df.pfaf_name, rotation=90)
 plt.grid(axis='y', linestyle='--', linewidth=0.5, zorder=1)
 plt.legend()
@@ -654,8 +653,8 @@ norm_mag = mcolors.BoundaryNorm(boundaries=bins, ncolors=cust_cmap_mag.N)
 
 plt.rcParams["font.family"] = "Arial"
 plt.rcParams["svg.fonttype"] = "none"
-plt.rcParams['font.size'] = 12
-fig = plt.figure(figsize=(12, 6))
+plt.rcParams['font.size'] = 11
+fig = plt.figure(figsize=(180/25.4, 115/25.4))
 ax = plt.axes(projection=ccrs.Robinson())
 ax.set_global()
 grat.plot(ax=ax, transform=ccrs.PlateCarree(), linewidth=0.2, color='gray',
@@ -670,8 +669,8 @@ pfaf.plot(ax=ax, transform=ccrs.PlateCarree(), column='mag_low',
           linewidth=0.4)
 sm = plt.cm.ScalarMappable(cmap=cust_cmap_mag, norm=norm_mag)
 sm.set_array([])
-cbar = plt.colorbar(sm, ax=ax, orientation='vertical', shrink=0.85)
-cbar.set_label('Variability Magnitude Ratio \nSWOT / MeanDRS Low')
+cbar = plt.colorbar(sm, ax=ax, orientation='vertical', shrink=0.67)
+cbar.set_label('River Storage Variability Ratio')
 cbar.set_ticks(bins)
 cbar.set_ticklabels([f'{tick:.2f}' for tick in bins])
 plt.show()
@@ -699,8 +698,8 @@ norm_mag_scen = mcolors.BoundaryNorm(boundaries, len(scen_cats))
 
 plt.rcParams["font.family"] = "Arial"
 plt.rcParams["svg.fonttype"] = "none"
-plt.rcParams['font.size'] = 12
-fig = plt.figure(figsize=(12, 6))
+plt.rcParams['font.size'] = 11
+fig = plt.figure(figsize=(180/25.4, 115/25.4))
 ax = plt.axes(projection=ccrs.Robinson())
 ax.set_global()
 grat.plot(ax=ax, transform=ccrs.PlateCarree(), linewidth=0.2, color='gray',
@@ -736,8 +735,8 @@ norm_corr = mcolors.BoundaryNorm(boundaries=bins, ncolors=cust_cmap_corr.N)
 
 plt.rcParams["font.family"] = "Arial"
 plt.rcParams["svg.fonttype"] = "none"
-plt.rcParams['font.size'] = 12
-fig = plt.figure(figsize=(12, 6))
+plt.rcParams['font.size'] = 11
+fig = plt.figure(figsize=(180/25.4, 115/25.4))
 ax = plt.axes(projection=ccrs.Robinson())
 ax.set_global()
 grat.plot(ax=ax, transform=ccrs.PlateCarree(), linewidth=0.2, color='gray',
@@ -752,8 +751,8 @@ pfaf.plot(ax=ax, transform=ccrs.PlateCarree(), column='corr_dup',
           linewidth=0.4)
 sm = plt.cm.ScalarMappable(cmap=cust_cmap_corr, norm=norm_corr)
 sm.set_array([])
-cbar = plt.colorbar(sm, ax=ax, orientation='vertical', shrink=0.85)
-cbar.set_label('Pearson Correlation \nSWOT vs MeanDRS',)
+cbar = plt.colorbar(sm, ax=ax, orientation='vertical', shrink=0.67)
+cbar.set_label('River Storage Anomaly \nPearson Correlation',)
 cbar.set_ticks(bins)
 cbar.set_ticklabels([f'{tick:.1f}' for tick in bins])
 plt.show()
@@ -781,8 +780,8 @@ norm_lag = mcolors.BoundaryNorm(boundaries=bins, ncolors=cust_cmap_lag.N)
 
 plt.rcParams["font.family"] = "Arial"
 plt.rcParams["svg.fonttype"] = "none"
-plt.rcParams['font.size'] = 12
-fig = plt.figure(figsize=(12, 6))
+plt.rcParams['font.size'] = 11
+fig = plt.figure(figsize=(180/25.4, 115/25.4))
 ax = plt.axes(projection=ccrs.Robinson())
 ax.set_global()
 grat.plot(ax=ax, transform=ccrs.PlateCarree(), linewidth=0.2, color='gray',
@@ -797,8 +796,8 @@ pfaf.plot(ax=ax, transform=ccrs.PlateCarree(), column='abs_best_lag',
           linewidth=0.4)
 sm = plt.cm.ScalarMappable(cmap=cust_cmap_lag, norm=norm_lag)
 sm.set_array([])
-cbar = plt.colorbar(sm, ax=ax, orientation='vertical', shrink=0.85)
-cbar.set_label('Optimal Absolute Lag, Months \nSWOT vs MeanDRS',)
+cbar = plt.colorbar(sm, ax=ax, orientation='vertical', shrink=0.67)
+cbar.set_label('River Storage Anomaly \nOptimal Absolute Lag, months')
 cbar.set_ticks(bins)
 cbar.set_ticklabels([f'{tick:.2f}' for tick in bins])
 plt.show()
@@ -809,8 +808,8 @@ plt.show()
 # Plot bar plot of number of reaches observed
 plt.rcParams["font.family"] = "Arial"
 plt.rcParams["svg.fonttype"] = "none"
-plt.rcParams['font.size'] = 12
-plt.figure(figsize=(12, 6))
+plt.rcParams['font.size'] = 9
+fig = plt.figure(figsize=(200/25.4, 90/25.4))
 plt.bar(np.arange(len(obs_df)), obs_df.sword, width=0.6, color='#9E95CB',
         edgecolor='black', label="All SWORD Reaches", zorder=1)
 plt.bar(np.arange(len(obs_df)), obs_df.sw_type1, width=0.6, color='#FF463B',
@@ -822,8 +821,8 @@ plt.bar(np.arange(len(obs_df)), obs_df.V_anom_ms, width=0.6, color='#3FB9DE',
         zorder=3)
 plt.xlim([-.5, 60.5])
 plt.ylim([0, 20000])
-plt.ylabel('Number of Reaches', fontsize=13)
-plt.xlabel('Pfaf Region', fontsize=13)
+plt.ylabel('Number of Reaches', fontsize=11)
+plt.xlabel('Pfaf Region', fontsize=11)
 plt.xticks(ticks=np.arange(len(obs_df)), labels=obs_df.pfaf, rotation=90)
 plt.legend()
 plt.show()
